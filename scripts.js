@@ -31,7 +31,7 @@ function write_header()
    d.writeln('');
    d.writeln('<table style="margin: 0px auto">');
    d.writeln('   <tr>');
-   d.writeln('      <td style="text-align: center; font-family: Tahoma; font-size: 40pt; letter-spacing: 4px; padding-top: 0px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
+   d.writeln('      <td style="text-align: center; font-family: Tahoma; font-size: 30pt; letter-spacing: 4px; padding-top: 0px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
    d.writeln('   </tr>');
    d.writeln('</table>');
    d.writeln('');
