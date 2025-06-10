@@ -27,7 +27,7 @@ function write_header()
    d.writeln('   <a href="#">HOW TO PURCHASE</a>');
    d.writeln('</div>');
    d.writeln('');
-   d.writeln('<span id="menu" style="font-size: 30px; cursor: pointer; visibility: hidden" onclick="display_menu()" onPress="display_menu()">&#9776;</span>');
+   d.writeln('<span id="menu" style="font-size: 30px; cursor: pointer; visibility: hidden; padding-left: 10px" onclick="display_menu()" onPress="display_menu()">&#9776;</span>');
    d.writeln('');
    d.writeln('<table style="margin: 0px auto">');
    d.writeln('   <tr>');
