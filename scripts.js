@@ -36,7 +36,7 @@ function write_header()
    d.writeln('</table>');
    d.writeln('');
    d.writeln('<table id="header_row_2" style="padding-bottom: 50px; margin: 0px auto; width: 80%">');
-   d.writeln('   <tr style="vertical-align: top; text-align: center" nowrap>');
+   d.writeln('   <tr style="vertical-align: top; text-align: center">');
    d.writeln('      <td><a class="link" href="#">HOME</a></td>');
    d.writeln('      <td><a class="link" href="#">NEW WORK</a></td>');
    d.writeln('      <td><a class="link" href="#">FEATURED WORK</a></td>');
