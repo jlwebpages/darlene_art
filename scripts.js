@@ -29,9 +29,9 @@ function write_header()
    d.writeln('');
    d.writeln('<span id="menu" style="font-size: 30px; cursor: pointer; visibility: hidden; padding-left: 5px" onclick="display_menu()" onPress="display_menu()">&#9776;</span>');
    d.writeln('');
-   d.writeln('<table style="margin: 0px auto">');
+   d.writeln('<table style="font-size: 40pt; margin: 0px auto">');
    d.writeln('   <tr>');
-   d.writeln('      <td style="text-align: center; font-family: Tahoma; font-size: 30pt; letter-spacing: 4px; padding-top: 0px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
+   d.writeln('      <td id="title" style="text-align: center; font-family: Tahoma; letter-spacing: 4px; padding-top: 0px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
    d.writeln('   </tr>');
    d.writeln('</table>');
    d.writeln('');
