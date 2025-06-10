@@ -1,39 +1,48 @@
-      .background_color {background-color: white}
+.background_color {background-color: white}
 
-      .menu
-      {
-         height: 100%;
-         width: 0%;
-         position: fixed;
-         top: 0;
-         left: 0;
-         background-color: white;
-         overflow-x: hidden;
-         padding-top: 60px;
-      }
+.link
+{
+   font-family: Lato;
+   font-size: 12pt;
+   color: darkslategray;
+   letter-spacing: 3px;
+   text-decoration: none;
+   padding-left: 10px;
+   padding-right: 10px;
+}
 
-      .menu a
-      {
-         padding: 8px 8px 8px 32px;
-         text-decoration: none;
-         font-family: Lato;
-         font-size: 16px;
-         letter-spacing: 3px;
-         color: darkslategray;
-         display: block;
+a.link:hover {font-weight: bold}
 
-      }
+.menu
+{
+   height: 100%;
+   width: 0%;
+   position: fixed;
+   top: 0;
+   left: 0;
+   background-color: white;
+   overflow-x: hidden;
+   padding-top: 60px;
+}
 
-      .menu a:hover
-      {
-         text-decoration: underline;
-      }
+.menu a
+{
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-family: Lato;
+   font-size: 16px;
+   letter-spacing: 3px;
+   color: darkslategray;
+   display: block;
+}
 
-      .menu .close_button
-      {
-         position: absolute;
-         top: 0;
-         right: 25px;
-         font-size: 36px;
-         margin-left: 50px;
-      }  
+.menu a:hover {font-weight: bold}
+
+.menu .close_button
+{
+   position: absolute;
+   top: 0;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
+}  
