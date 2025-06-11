@@ -23,7 +23,7 @@ function write_header()
    d.writeln('   <a href="javascript:void(0)" class="close_button" onclick="close_menu();" onPress="close_menu();">&times;</a>');
    d.writeln('   <a href="home.html"          >HOME</a>');
    d.writeln('   <a href="new_work.html"      >NEW WORK</a>');
-   d.writeln('   <a href="feature_work.html"  >FEATURED WORK</a>');
+   d.writeln('   <a href="featured_work.html" >FEATURED WORK</a>');
    d.writeln('   <a href="photo_art.html"     >PHOTO ART</a>');
    d.writeln('   <a href="works_on_paper.html">WORKS ON PAPER</a>');
    d.writeln('   <a href="how_to_purchse.html">HOW TO PURCHASE</a>');
@@ -40,7 +40,7 @@ function write_header()
    d.writeln('   <tr>');
    d.writeln('      <td><a class="link" href="home.html"          >HOME</a></td>');
    d.writeln('      <td><a class="link" href="new_work.html"      >NEW WORK</a></td>');
-   d.writeln('      <td><a class="link" href="feature_work.html"  >FEATURED WORK</a></td>');
+   d.writeln('      <td><a class="link" href="featured_work.html" >FEATURED WORK</a></td>');
    d.writeln('      <td><a class="link" href="photo_art.html"     >PHOTO ART</a></td>');
    d.writeln('      <td><a class="link" href="works_on_paper.html">WORKS ON PAPER</a></td>');
    d.writeln('      <td><a class="link" href="how_to_purchse.html">HOW TO PURCHASE</a></td>');
