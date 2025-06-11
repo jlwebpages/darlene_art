@@ -3,55 +3,33 @@
 <html>
 
 <head>
-
    <title>Darlene Laguna Art</title>
-
    <meta name="viewport" content="width=device-width, initial-scale=1">
-
    <link href="styles.css" rel="stylesheet" type="text/css">
-
    <script language="JavaScript" src=scripts.js></script>
-
-   <style>
-      @media only screen and (max-width: 1024px)
-      {
-         body
-         {
-            #title         {font-size:  30pt             }
-            #sub_title     {font-size:  30pt             }
-            #header_row_2  {display:    none             }
-            #image_desktop {display:    none             }
-            #image_mobile  {display:    block!important  }
-            #menu          {visibility: visible!important}
-         }
-   </style>
-
 </head>
 
-<body class="background_color"
-      style="color: black;
-            border: 0px;
-            margin: 0">
+<body class="body">
 
 
-<script>write_header()</script>
+<script>write_header();</script>
 
 
-<table class="table_background" style="margin: 0px auto; width: 95%">
-   <tr id="image_mobile" style="display: none">
-      <td style="padding: 25px 25px 0px 25px">
+<table class="black_table" style="width: 95%">
+   <tr>
+      <td id="mobile" style="padding: 25px 25px 0px 25px; display: none">
          <img src="new_work.jpeg" width=100% style="border-radius: 50%">
       </td>
    </tr>
    <tr>
-      <td style="vertical-align: top; text-align: left; line-height: 30px; color: silver; font-size: 16pt; padding: 50px">
-         <span style="color: white; font-family: Tahoma; font-size: 40pt; letter-spacing: 4px;"><span id="sub_title">NEW WORK</span></span><br><br>
+      <td id="text" class="text" style="padding: 50px">
+         <span id="sub_title" class="sub_title">NEW WORK</span><br><br>
          My new work reflects my ongoing immersion in my current place and time.<br>
          <br>
          All pieces are acrylic and mixed media.<br>
          To inquire about pricing or for more information, please use the contact form or email me at <a href="mailto:dkclaguna@gmail.com?subject=Darlene Laguna Art" style="text-decoration: none; color: red">dkclaguna@gmail.com</a>.
       </td>
-      <td id="image_desktop" style="vertical-align: top; padding: 50px">
+      <td id="desktop" style="vertical-align: top; padding: 50px">
          <img src="new_work.jpeg" height="414.9px" width="414.9px" style="border-radius: 50%">
       </td>
    </tr>

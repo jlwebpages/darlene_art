@@ -1,5 +1,73 @@
-.background_color {background-color: white}
-.table_background {background: black      }
+@media only screen and (max-width: 1024px)
+{
+   body
+   {
+      #menu      {visibility: visible!important}
+      #title     {font-size:  30pt!important   }
+      #links     {display:    none!important   }
+      #sub_title {font-size:  25pt!important   }
+      #text      {padding:    25px!important   }
+      #desktop   {display:    none!important   }
+      #mobile    {display:    block!important  }
+   }
+}
+
+.black_table
+{
+   background-color: black;
+   color: white;
+   text-align: left;
+   border-spacing: 0px;
+   padding: 0px;
+   margin: 0 auto;
+}
+
+.white_table
+{
+   background-color: white;
+   color: black;
+   text-align: center;
+   border-spacing: 0px;
+   padding: 0px;
+   margin: 0 auto;
+}
+
+.title
+{
+   font-family: Tahoma;
+   color: black;
+   font-size: 40pt;
+   letter-spacing: 4px;
+}
+
+.sub_title
+{
+   font-family: Tahoma;
+   color: white;
+   font-size: 40pt;
+   letter-spacing: 4px;
+}
+
+.body
+{
+   background-color: white;
+   color: black;
+   margin: 0px;
+}
+
+.text
+{
+   font-family: Lato;
+   font-size: 16pt; 
+   color: silver;
+   vertical-align: top;
+   text-align: left;
+   line-height: 30px;
+}
+
+
+
+
 
 .link
 {
@@ -29,11 +97,11 @@ a.link:hover {font-weight: bold}
 .menu a
 {
    padding: 8px 8px 8px 32px;
-   text-decoration: none;
+      text-decoration: none;
    font-family: Lato;
-   font-size: 16px;
-   letter-spacing: 3px;
-   color: darkslategray;
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: darkslategray;
    display: block;
 }
 
