@@ -29,14 +29,14 @@ function write_header()
    d.writeln('   <a href="how_to_purchse.html">HOW TO PURCHASE</a>');
    d.writeln('</div>');
    d.writeln('');
-   d.writeln('<table class="white_table" style="padding-bottom: 50px">');
+   d.writeln('<table class="white_table">');
    d.writeln('   <tr>');
-   d.writeln('      <td id="title" class="title">DARLENE LAGUNA ART</td>');
+   d.writeln('      <td id="title" class="title" style="padding-top: 15px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
    d.writeln('   </tr>');
    d.writeln('');
    d.writeln('</table>');
    d.writeln('');
-   d.writeln('<table id="links" class="white_table" style="vertical-align: top; padding-bottom: 50px; width: 80%">');
+   d.writeln('<table id="links" class="white_table" style="padding-bottom: 50px; width: 80%">');
    d.writeln('   <tr>');
    d.writeln('      <td><a class="link" href="home.html"          >HOME</a></td>');
    d.writeln('      <td><a class="link" href="new_work.html"      >NEW WORK</a></td>');

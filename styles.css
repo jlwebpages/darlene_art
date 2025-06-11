@@ -2,15 +2,63 @@
 {
    body
    {
-      #menu      {visibility: visible!important}
-      #title     {font-size:  30pt!important   }
-      #links     {display:    none!important   }
-      #sub_title {font-size:  25pt!important   }
-      #text      {padding:    25px!important   }
-      #desktop   {display:    none!important   }
-      #mobile    {display:    block!important  }
+      #menu      {visibility:     visible!important}
+      #title     {font-size:      30pt!important   }
+      #title     {padding-top:    0px!important    }
+      #title     {padding-bottom: 25px!important   }
+      #links     {display:        none!important   }
+      #sub_title {font-size:      25pt!important   }
+      #text      {padding:        25px!important   }
+      #desktop   {display:        none!important   }
+      #mobile    {display:        block!important  }
    }
 }
+
+.body
+{
+   background-color: white;
+   color: black;
+   margin: 0px;
+}
+
+.title
+{
+   font-family: Tahoma;
+   color: black;
+   font-size: 40pt;
+   letter-spacing: 4px;
+}
+
+.sub_title
+{
+   font-family: Tahoma;
+   color: white;
+   font-size: 40pt;
+   letter-spacing: 4px;
+}
+
+.text
+{
+   font-family: Lato;
+   font-size: 16pt; 
+   color: silver;
+   vertical-align: top;
+   text-align: left;
+   line-height: 30px;
+}
+
+.link
+{
+   font-family: Lato;
+   font-size: 12pt;
+   color: darkslategray;
+   letter-spacing: 3px;
+   text-decoration: none;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+a.link:hover {font-weight: bold}
 
 .black_table
 {
@@ -31,56 +79,6 @@
    padding: 0px;
    margin: 0 auto;
 }
-
-.title
-{
-   font-family: Tahoma;
-   color: black;
-   font-size: 40pt;
-   letter-spacing: 4px;
-}
-
-.sub_title
-{
-   font-family: Tahoma;
-   color: white;
-   font-size: 40pt;
-   letter-spacing: 4px;
-}
-
-.body
-{
-   background-color: white;
-   color: black;
-   margin: 0px;
-}
-
-.text
-{
-   font-family: Lato;
-   font-size: 16pt; 
-   color: silver;
-   vertical-align: top;
-   text-align: left;
-   line-height: 30px;
-}
-
-
-
-
-
-.link
-{
-   font-family: Lato;
-   font-size: 12pt;
-   color: darkslategray;
-   letter-spacing: 3px;
-   text-decoration: none;
-   padding-left: 10px;
-   padding-right: 10px;
-}
-
-a.link:hover {font-weight: bold}
 
 .menu
 {
