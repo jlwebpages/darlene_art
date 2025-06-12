@@ -4,8 +4,6 @@
    {
       #menu      {visibility:     visible!important}
       #title     {font-size:      30pt!important   }
-      #title     {padding-top:    0px!important    }
-      #title     {padding-bottom: 25px!important   }
       #links     {display:        none!important   }
       #sub_title {font-size:      25pt!important   }
       #text      {padding:        25px!important   }
@@ -26,16 +24,17 @@
    font-family: Arial Narrow;
    font-weight: bold;
    color: black;
-   font-size: 42pt;
+   font-size: 40pt;
    letter-spacing: 6px;
 }
 
 .sub_title
 {
-   font-family: Tahoma;
+   font-family: Arial Narrow;
+   font-weight: bold;
    color: white;
-   font-size: 40pt;
-   letter-spacing: 4px;
+   font-size: 30pt;
+   letter-spacing: 2px;
 }
 
 .text

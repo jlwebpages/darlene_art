@@ -31,7 +31,7 @@ function write_header()
    d.writeln('');
    d.writeln('<table class="white_table">');
    d.writeln('   <tr>');
-   d.writeln('      <td id="title" class="title" style="padding-top: 15px; padding-bottom: 50px">DARLENE LAGUNA ART</td>');
+   d.writeln('      <td id="title" class="title" style="padding-top: 0px; padding-bottom: 25px">DARLENE LAGUNA ART</td>');
    d.writeln('   </tr>');
    d.writeln('');
    d.writeln('</table>');
