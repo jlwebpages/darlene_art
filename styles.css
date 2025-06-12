@@ -4,8 +4,9 @@
    {
       #menu      {visibility:     visible!important}
       #title     {font-size:      30pt!important   }
+      #title     {letter-spacing: 3px!important    }
       #links     {display:        none!important   }
-      #sub_title {font-size:      25pt!important   }
+      #sub_title {font-size:      22pt!important   }
       #text      {padding:        25px!important   }
       #desktop   {display:        none!important   }
       #mobile    {display:        block!important  }
@@ -30,11 +31,9 @@
 
 .sub_title
 {
-   font-family: Arial Narrow;
-   font-weight: bold;
+   font-family: Arial;
    color: white;
    font-size: 30pt;
-   letter-spacing: 3px;
 }
 
 .text
