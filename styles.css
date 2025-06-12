@@ -3,8 +3,8 @@
    body
    {
       #menu      {visibility:     visible!important}
-      #title     {font-size:      30pt!important   }
-      #title     {letter-spacing: 3px!important    }
+      #title     {font-size:      28pt!important   }
+      #title     {letter-spacing: 2px!important    }
       #links     {display:        none!important   }
       #sub_title {font-size:      22pt!important   }
       #text      {padding:        25px!important   }
@@ -22,11 +22,11 @@
 
 .title
 {
-   font-family: Arial Narrow;
+   font-family: Arial;
    font-weight: bold;
    color: black;
-   font-size: 40pt;
-   letter-spacing: 6px;
+   font-size: 38pt;
+   letter-spacing: 4px;
 }
 
 .sub_title
@@ -51,7 +51,7 @@
    font-family: Lato;
    font-size: 12pt;
    color: darkslategray;
-   letter-spacing: 3px;
+   letter-spacing: 2px;
    text-decoration: none;
    padding-left: 10px;
    padding-right: 10px;
@@ -94,6 +94,7 @@ a.link:hover {font-weight: bold}
    border-spacing: 0px;
    padding: 0px;
    margin: 0 auto;
+   width: 95%;
 }
 
 .menu
@@ -114,7 +115,7 @@ a.link:hover {font-weight: bold}
    text-decoration: none;
    font-family: Lato;
    font-size: 16px;
-   letter-spacing: 3px;
+   letter-spacing: 2px;
    color: darkslategray;
    display: block;
 }
