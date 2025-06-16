@@ -1,21 +1,25 @@
 @media only screen and (max-width: 1024px)
 {
-   #menu        {visibility:     visible !important}
-   #title       {font-size:      28pt    !important}
-   #title       {letter-spacing: 2px     !important}
-   #links       {display:        none    !important}
-   #sub_title   {font-size:      22pt    !important}
-   #sub_title   {padding-bottom: 15px    !important}
-   #text        {padding:        25px    !important}
-   #desktop     {display:        none    !important}
-   #mobile      {display:        block   !important}
-   #art_gallery {column-count:   1       !important}
+   #menu        {visibility:     visible  !important}
+   #title       {font-size:      28pt     !important}
+   #title       {letter-spacing: 2px      !important}
+   #links       {display:        none     !important}
+   #sub_title   {font-size:      22pt     !important}
+   #sub_title   {padding-bottom: 15px     !important}
+   #text        {padding:        25px     !important}
+   #desktop     {display:        none     !important}
+   #mobile      {display:        block    !important}
+   #art_gallery {column-count:   1        !important}
+   #back_button {font-size:      15pt     !important}
+   #back_button {padding: 0px 6px 0px 6px !important}
+
 }
 
 .body
 {
    background-color: white;
    color: black;
+   padding: 0px;
    margin: 0px;
 }
 
@@ -61,8 +65,8 @@ a.link:hover {font-weight: bold}
 
 .e-mail
 {
+   color: #D20000;
    text-decoration: none;
-   color: red;
 }
 
 .copyright
@@ -183,4 +187,18 @@ a.link:hover {font-weight: bold}
 {
    padding-top: 10px;
    display: inline-block;
+}
+
+.back_button
+{
+   background-color: black;
+   font-family: Arial;
+   font-size: 20pt;
+   color: silver;
+   border-width: 0px;
+   border-radius: 20%;
+   padding: 0px 8px 0px 8px;
+   position: absolute;
+   top: 5px;
+   right: 5px;
 }
