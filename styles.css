@@ -1,17 +1,41 @@
+/* General rules for non-desktop devices */
+
 @media only screen and (max-width: 1024px)
 {
-   #menu        {visibility:     visible  !important}
-   #title       {font-size:      28pt     !important}
-   #title       {letter-spacing: 2px      !important}
-   #links       {display:        none     !important}
-   #sub_title   {font-size:      22pt     !important}
-   #sub_title   {padding-bottom: 15px     !important}
-   #text        {padding:        25px     !important}
-   #desktop     {display:        none     !important}
-   #mobile      {display:        block    !important}
-   #art_gallery {column-count:   1        !important}
-   #back_button {font-size:      15pt     !important}
-   #back_button {padding: 0px 6px 0px 6px !important}
+   #menu        {visibility:     visible         !important}
+   #title       {font-size:      28pt            !important}
+   #title       {letter-spacing: 2px             !important}
+   #links       {display:        none            !important}
+   #sub_title   {font-size:      22pt            !important}
+   #sub_title   {padding-bottom: 15px            !important}
+   #text        {padding:        25px            !important}
+   #desktop     {display:        none            !important}
+   #mobile      {display:        block           !important}
+   #art_gallery {column-count:   1               !important}
+   #back_button {font-size:      15pt            !important}
+   #back_button {padding:        0px 6px 0px 6px !important}
+}
+
+/* Additional rules for iPads in portrait orientation */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait)
+{
+   #text_table  {width:        80%                !important}
+   #mobile      {padding:      50px 50px 0px 50px !important}
+   #text        {padding:      50px               !important}
+   #art_gallery {width:        80%                !important}
+   #art_gallery {column-count: 2                  !important}
+}
+
+/* Additional rules for mobile devices in landscape orientation */
+
+@media only screen and (max-width: 1024px) and (orientation: landscape)
+{
+   #text_table  {width:        80%                !important}
+   #mobile      {padding:      50px 50px 0px 50px !important}
+   #text        {padding:      50px               !important}
+   #art_gallery {width:        80%                !important}
+   #art_gallery {column-count: 2                  !important}
 }
 
 .body
@@ -49,6 +73,7 @@
    vertical-align: top;
    text-align: left;
    line-height: 30px;
+   padding: 50px;
 }
 
 .link
