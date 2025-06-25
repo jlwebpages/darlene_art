@@ -1,119 +1,112 @@
-
-function check_if_file_exists(file_path)
+function check_if_image_exists(gallery_name,image_number,max_number_of_images)
 {
-   file_exists = false;
-
    $.ajax
    (
    {
-      url: file_path,
+      url: gallery_name + "/" + gallery_name + "_" + image_number + ".jpg",
+
       type: "HEAD",
-      async: false,
 
       success: function()
       {
-         file_exists = true;
+         load_image(gallery_name,image_number,max_number_of_images);
       },
 
       error: function()
       {
-         file_exists = false;
+         if (image_number < max_number_of_images) check_if_image_exists(gallery_name,image_number+1,max_number_of_images);
       },
    }
    );
 
-   return file_exists;
+   return true;
 }
 
 function close_menu()
 {
    document.getElementById("menu_list").style.width = "0";
-}
 
-function display_data_from_file(file_name,element_id,display_error)
-{
-   $
-   (document).ready(function()
-   {
-      $.ajax
-      (
-      {
-         url: file_name,
-         dataType: "html",
-
-         success: function(data)
-         {
-            $("#"+element_id).html(data);
-         },
-
-         error: function()
-         {
-            if (display_error == true) alert("Failed to load data from file:  "+file_name);
-         },
-      }
-      );
-   }
-   );
+   return true;
 }
 
 function display_menu()
 {
    document.getElementById("menu_list").style.width = "250px";
+
+   return true;
 }
 
-function load_gallery(gallery_name)
+function load_data_from_file(file_name,element_id,display_error)
 {
-   var file_path_prefix = "";
-   var file_name_prefix = "";
-   var image_path       = "";
-   var max_image_count  = 25;
-
-
-   if (gallery_name == "new_work")       max_image_count = 6;
-   if (gallery_name == "featured_work")  max_image_count = 6;
-   if (gallery_name == "photo_art")      max_image_count = 12;
-   if (gallery_name == "works_on_paper") max_image_count = 9;
-
-   document.writeln('<div id="art_gallery"  style="column-count: 3" class="art_gallery">');
-
-   for (i = 1; i <= max_image_count; i++)
+   $.ajax
+   (
    {
-      file_name_prefix = gallery_name + "_" + i;
-      file_path_prefix = gallery_name + "/" + file_name_prefix;
-      image_path       = file_path_prefix + ".jpg";
+      url: file_name,
 
-      document.writeln('');
-      document.writeln('   <div class="art_image">');
-      document.writeln('');
-      document.writeln('      <a href="display_image.html?image_file_name='+image_path+'" target="_self"><img src="'+image_path+'"></a>');
-      document.writeln('');
-      document.writeln('      <p class="art_caption">');
+      dataType: "html",
 
-      document.writeln('         <span id="'+file_name_prefix+'_title" class="art_title"></span><br>');
-      display_data_from_file(file_path_prefix+"_title.txt",file_name_prefix+"_title",false);
-
-      document.writeln('         <span id="'+file_name_prefix+'_dimensions" class="art_dimensions"></span><br>');
-      display_data_from_file(file_path_prefix+"_dimensions.txt",file_name_prefix+"_dimensions",false);
-
-      if ( (gallery_name == "new_work") || (gallery_name == "featured_work") )
+      success: function(data)
       {
-         document.writeln('         <span id="'+file_name_prefix+'_paragraph" class="art_paragraph"></span>');
-         display_data_from_file(file_path_prefix+"_paragraph.txt",file_name_prefix+"_paragraph",false);
-      }
+         $("#"+element_id).html(data);
+      },
 
-      document.writeln('      </p>');
-      document.writeln('');
-      document.writeln('   </div>');
+      error: function()
+      {
+         if (display_error == true) alert("Failed to load data from file:  "+file_name);
+
+         $("#"+element_id).hide();
+      },
    }
+   );
 
-   document.writeln('');
-   document.writeln('</div>');
+   return true;
 }
 
+function load_image(gallery_name,image_number,max_number_of_images)
+{
+   var art_gallery_div  = document.getElementById("art_gallery");
+   var file_name_prefix = gallery_name + "_" + image_number;
+   var file_path_prefix = gallery_name + "/" + file_name_prefix;
+   var image_html       = "";
+   var image_path       = file_path_prefix + ".jpg";
+
+
+   image_html  = '<div class="art_image">';
+   image_html += '   <a href="display_image.html?image_file_name='+image_path+'" target="_self"><img src="'+image_path+'"></a>';
+   image_html += '   <p class="art_caption">';
+   image_html += '      <span id="'+file_name_prefix+'_title" class="art_title"></span><br>';
+   image_html += '      <span id="'+file_name_prefix+'_dimensions" class="art_dimensions"></span><br>';
+   image_html += '      <span id="'+file_name_prefix+'_paragraph" class="art_paragraph"></span>';
+   image_html += '   </p>';
+   image_html += '</div>';
+
+   art_gallery_div.insertAdjacentHTML("beforeend",image_html);
+
+   load_data_from_file(file_path_prefix+"_title.txt",file_name_prefix+"_title",false);
+   load_data_from_file(file_path_prefix+"_dimensions.txt",file_name_prefix+"_dimensions",false);
+   load_data_from_file(file_path_prefix+"_paragraph.txt",file_name_prefix+"_paragraph",false);
+
+   if (image_number < max_number_of_images) check_if_image_exists(gallery_name,image_number+1,max_number_of_images)
+
+   return true;
+}
+
+function load_images_into_gallery(gallery_name)
+{
+   var image_number         = 1;
+   var max_number_of_images = 25;
+
+
+   check_if_image_exists(gallery_name,image_number,max_number_of_images);
+
+   return true;
+}
 
 function write_copyright()
 {
    document.writeln('<div class="copyright">Copyright &copy 2024 Darlene Laguna Art<br>All Rights Reserved.</div>');
+
+   return true;
 }
 
 function write_header()
