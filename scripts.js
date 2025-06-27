@@ -102,6 +102,17 @@ function load_images_into_gallery(gallery_name)
    return true;
 }
 
+function scroll_to_top()
+{
+   $(document).ready(function()
+   {
+      window.scroll({top: 0});
+   }
+   );
+
+   return true;
+}
+
 function write_copyright()
 {
    document.writeln('<div class="copyright">Copyright &copy 2024 Darlene Laguna Art<br>All Rights Reserved.</div>');
