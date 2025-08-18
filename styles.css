@@ -45,6 +45,12 @@
    #desktop_image {padding:        50px 20px 50px 15px !important}
 }
 
+@supports (height: 100dvh)
+{
+   .image_container_one_column {height: 100dvh !important}
+   .image_container_two_column {height: 100dvh !important}
+}
+
 .body
 {
    background-color: white;
@@ -146,8 +152,7 @@ a.link:hover
    color: darkslategray;
    text-align: center;
    line-height: 20px;
-   padding-top: 75px;
-   padding-bottom: 50px;
+   padding: 25px;
 }
 
 .border_radius
@@ -227,11 +232,18 @@ a.link:hover
 
 .art_caption
 {
+   background-color: white;
    font-family: Arial;
    font-size: 16px;
    color: darkslategray;
    text-align: left;
+   justify-self: start;
+   align-self: start;
+   height: 100%;
+   min-width: 200px;
    margin: 0px;
+   padding: 0px 10px 10px 10px;
+   overflow-y: scroll;
 }
 
 .art_title
@@ -253,6 +265,7 @@ a.link:hover
 .art_paragraph
 {
    padding-top: 10px;
+   padding-bottom: 10px;
    display: inline-block;
 }
 
@@ -268,4 +281,27 @@ a.link:hover
    position: absolute;
    top: 5px;
    right: 5px;
+}
+
+.image_container_one_column
+{
+   background-color: white;
+   display: grid;
+   grid-template-columns: 1fr;
+   place-items: center;
+   place-content: start;
+   width: 100%;
+   height: 100vh;
+}
+
+.image_container_two_column
+{
+   background-color: black;
+   display: grid;
+   grid-template-columns: auto auto;
+   justify-content: center;
+   gap: 0px;
+   height: 100vh;
+   margin: 0px auto;
+   overflow-y: hidden;
 }
