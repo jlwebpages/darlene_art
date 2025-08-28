@@ -49,6 +49,8 @@
    .art_gallery   {column-count:   2                   !important}
 }
 
+/* Replace vh with dvh on devices that support dvh */
+
 @supports (height: 100dvh)
 {
    .image_container_one_column {height: 100dvh !important}
@@ -245,9 +247,14 @@ a.link:hover
    height: auto;
 }
 
-.art_image img:hover
+@media (hover: hover)
 {
-   transform: scale(1.05);
+   /* The following should only be applied if devices support hovering */
+
+   .art_image img:hover
+   {
+      transform: scale(1.05);
+   }
 }
 
 .art_caption
