@@ -10,7 +10,7 @@
    <script language="JavaScript" src=scripts.js></script>
 </head>
 
-<body class="body" oncontextmenu="return false;">
+<body class="body" style="background-color: black" oncontextmenu="return false;">
 
 
 <script>
@@ -76,8 +76,8 @@ image.src = image_file_name;
 
 image.onload = function()
 {
-   image_width  = this.width;
-   image_height = this.height;
+   image_width  = this.naturalWidth;
+   image_height = this.naturalHeight;
 
    width_ratio  = image_width/window.innerWidth;
    height_ratio = image_height/window.innerHeight;
@@ -189,10 +189,10 @@ image.onload = function()
    d.writeln('   <script language="JavaScript" src=scripts.js><\/script>');
    d.writeln('</head>');
    d.writeln('');
-   d.writeln('<body class="body" onload="load_image_caption();" oncontextmenu="return false;">');
+   d.writeln('<body class="body" style="background-color: black" onload="load_image_caption();" oncontextmenu="return false;">');
    d.writeln('');
    d.writeln('');
-   d.writeln('<div class='+container_class+'>');
+   d.writeln('<div id="art_container" class='+container_class+'>');
    d.writeln('');
    d.writeln('   <div id="image_div" style="display: inline-block; position: relative">');
    d.writeln('      <img src="'+image_file_name+'" style="'+image_style+'">');
