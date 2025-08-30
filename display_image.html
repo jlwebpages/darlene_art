@@ -71,8 +71,7 @@ if (Number.isInteger(image_number) == false)
    history.back();
 }
 
-image     = new Image();
-image.src = image_file_name;
+image = new Image();
 
 image.onload = function()
 {
@@ -195,7 +194,7 @@ image.onload = function()
    d.writeln('<div id="art_container" class='+container_class+'>');
    d.writeln('');
    d.writeln('   <div id="image_div" style="display: inline-block; position: relative">');
-   d.writeln('      <img src="'+image_file_name+'" style="'+image_style+'">');
+   d.writeln('      <img src="'+this.src+'" style="'+image_style+'">');
    d.writeln('      <button class="nav_button nav_left_offset" style="top: '+nav_button_vertical_position+'" onclick="update_image(\'left\');"><div class="nav_left_shape"></div></button>');
    if (container_style == one_column_container)
    {
@@ -224,6 +223,12 @@ image.onload = function()
 
    d.close();
 }
+
+image.src = image_file_name;
+
+</script>
+
+<script>
 
 function check_if_file_exists(gallery_name,image_number,direction)
 {
