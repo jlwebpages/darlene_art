@@ -1,6 +1,6 @@
-/* Rules for mobile devices */
+/* Rules for mobile devices in portrait orientation */
 
-@media only screen and (max-width: 655px)
+@media only screen and (max-width: 655px) and (orientation: portrait)
 {
    .menu_button     {visibility:     visible             !important}
    .title           {font-size:      38px                !important}
@@ -27,7 +27,7 @@
 
 /* Rules for mobile devices in landscape orientation */
 
-@media only screen and (max-width: 768px) and (orientation: landscape)
+@media only screen and (max-width: 767px) and (orientation: landscape)
 {
    .menu_button     {visibility:     visible             !important}
    .title           {font-size:      38px                !important}
@@ -74,9 +74,9 @@
    #three_column_3 {display:        none                !important}
 }
 
-/* Rules for iPads in landscape orientation */
+/* Rules for iPads and tablets in landscape orientation */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape)
+@media only screen and (min-width: 768px) and (orientation: landscape)
 {
    .art_gallery    {column-count:  3     !important}
    .art_gallery    {column-gap:    40px  !important}
