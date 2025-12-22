@@ -234,7 +234,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
 function display_menu()
 {
-   document.getElementById("menu_list").style.width = "170px";
+   document.getElementById("menu_list").style.width = "150px";
    document.getElementById("menu_list").style.padding = "50px 30px 15px 20px";
 
    return true;
@@ -515,9 +515,17 @@ function validate_received_image_name()
    return true;
 }
 
-function write_copyright()
+function write_footer()
 {
-   document.writeln('<div class="copyright" style="font-size: 12px">Copyright &copy 2025 Darlene Laguna Art<br>All Rights Reserved.</div>');
+   var year = new Date().getFullYear();
+
+
+   document.writeln('<div style="text-align: center; padding: 25px 0px 0px 0px">');
+   document.writeln('   <a href="mailto:dkclaguna@gmail.com?subject=Darlene Laguna Art"><img src="email_icon.png"     height="15px" style="padding: 0px 20px 0px 20px; vertical-align: middle"></a>');
+   document.writeln('   <a href="https://www.instagram.com/dklaguna_art">               <img src="instagram_icon.png" height="16px" style="padding: 0px 20px 0px 20px; vertical-align: middle"></a>');
+   document.writeln('</div>');
+   document.writeln('');
+   document.writeln('<div class="copyright">Copyright &copy '+year+' Darlene Laguna Art<br>All Rights Reserved.</div>');
 
    return true;
 }
@@ -534,19 +542,23 @@ function write_header()
    d.writeln('');
    d.writeln('<div id="menu_list" class="menu">');
    d.writeln('   <a href="javascript:void(0)" class="close_button" onclick="close_menu();">&times;</a>');
-   d.writeln('   <a href="featured_work.html"  >FEATURED WORK</a>');
-   d.writeln('   <a href="photo_art.html"      >PHOTO ART</a>');
-   d.writeln('   <a href="works_on_paper.html" >WORKS ON PAPER</a>');
-   d.writeln('   <a href="about.html"          >ABOUT</a>');
+   d.writeln('   <a href="featured_work.html"  >Featured Work</a>');
+   d.writeln('   <a href="photo_art.html"      >Photo Art</a>');
+   d.writeln('   <a href="works_on_paper.html" >Paper</a>');
+   d.writeln('   <a href="about.html"          >About</a>');
+   d.writeln('   <div style="border-top: 1px solid darkslategray; margin: 10px 0px 0px 10px">');
+   d.writeln('      <a href="mailto:dkclaguna@gmail.com?subject=Darlene Laguna Art" style="display: inline-block"><img src="email_icon.png"     height="15px" style="margin: 15px 0px 0px -10px"></a>');
+   d.writeln('      <a href="https://www.instagram.com/dklaguna_art"                style="display: inline-block"><img src="instagram_icon.png" height="16px" ></a>');
+   d.writeln('   </div>');
    d.writeln('</div>');
    d.writeln('');
-   d.writeln('<div class="title">DARLENE LAGUNA ART</div>');
+   d.writeln('<div class="title">DARLENE LAGUNA</div>');
    d.writeln('');
    d.writeln('<div class="header_links">');
-   d.writeln('   <a id="featured_work_link"  class="header_link" href="featured_work.html" >FEATURED WORK</a>');
-   d.writeln('   <a id="photo_art_link"      class="header_link" href="photo_art.html"     >PHOTO ART</a>');
-   d.writeln('   <a id="works_on_paper_link" class="header_link" href="works_on_paper.html">WORKS ON PAPER</a>')
-   d.writeln('   <a id="about_link"          class="header_link" href="about.html"         >ABOUT</a>');
+   d.writeln('   <a id="featured_work_link"  class="header_link" href="featured_work.html" >Featured Work</a>');
+   d.writeln('   <a id="photo_art_link"      class="header_link" href="photo_art.html"     >Photo Art</a>');
+   d.writeln('   <a id="works_on_paper_link" class="header_link" href="works_on_paper.html">Paper</a>')
+   d.writeln('   <a id="about_link"          class="header_link" href="about.html"         >About</a>');
    d.writeln('</div>');
    d.writeln('');
    d.writeln('');
