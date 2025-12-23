@@ -2,6 +2,6 @@ Sometimes it’s nice to just “be” in nature - focusing and unfocusing for a
 
 <span class="art_paragraph" style="padding-top: 20px"><b>Pause</b> (top)</span>
 
-<span class="art_paragraph" style="padding-top: 0px"><b>Sanctuary</b> (center)</span>
+<span class="art_paragraph" style="padding-top: 0px"><b>Sanctuary</b> (middle)</span>
 
-<span class="art_paragraph" style="padding-top: 0px"><b>Breathing Space</b> (right)</span>
+<span class="art_paragraph" style="padding-top: 0px"><b>Breathing Space</b> (bottom)</span>
