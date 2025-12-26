@@ -538,7 +538,7 @@ function write_gallery_header(gallery_name)
    if (gallery_name == "photo_art")      gallery_name = "Photo Art";
    if (gallery_name == "works_on_paper") gallery_name = "Paper";
 
-   document.getElementById("art_gallery").insertAdjacentHTML("beforebegin","<div id='gallery_header' class='header_link' style='text-align: center; display: none'>"+gallery_name+"</div>");
+   document.getElementById("art_gallery").insertAdjacentHTML("beforebegin","<div id='gallery_header' class='header_link' style='text-align: center; margin-bottom: 25px; display: none'>"+gallery_name+"</div>");
 
    return true;
 }
