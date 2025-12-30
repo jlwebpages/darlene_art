@@ -14,20 +14,7 @@
 
 
 <script>
-   var URL_string        = window.location.search;
-   var URL_parameters    = new URLSearchParams(URL_string);
-   var mode              = URL_parameters.get("mode");
-   var scroll_to_element = false;
-
-
-   if (mode == "upcoming_exhibition")
-   {
-      scroll_to_element = true;
-   }
-
    write_header();
-   load_data_from_file('about/about.txt','about_text',true); 
-   load_data_from_file('about/exhibitions.txt','exhibitions_text',true,scroll_to_element); 
    document.getElementById("about_link").className = "clicked_header_link";
 </script>
 
@@ -53,7 +40,17 @@
 
 </table>
 
-<script>write_footer();</script>
+<script>
+   var URL_string            = window.location.search;
+   var URL_parameters        = new URLSearchParams(URL_string);
+   var mode                  = URL_parameters.get("mode");
+   var scroll_to_exhibitions = false;
+
+   if (mode == "upcoming_exhibition") scroll_to_exhibitions = true;
+
+   load_data_from_file("about/about.txt","about_text",true,scroll_to_exhibitions); 
+   write_footer();
+</script>
 
 
 </body>
