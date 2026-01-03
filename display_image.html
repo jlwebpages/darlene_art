@@ -12,7 +12,22 @@
 
 <body class="body" style="background-color: black" onload="validate_received_image_name();" oncontextmenu="return false;">
 
-   <!-- Load HTML from display_image_with_caption function. -->
+ 
+ <!-- HTML will be loaded via the onload="validate_received_image_name();" function. -->
+
+<script>
+
+   // Perform a hard reload when the device window size or orientation changes.
+
+   window.addEventListener
+   ("resize", function()
+   {
+      location.href = self.location.href;
+   }
+   );
+
+</script>
+
 
 </body>
 

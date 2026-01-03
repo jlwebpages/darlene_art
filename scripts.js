@@ -67,150 +67,135 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
    image.onload = function()
    {
-      var adjusted_image_height        = 0;
-      var adjusted_image_width         = 0;
-      var art_caption_style            = "";
-      var container_class              = "image_container_two_column";
-      var container_style              = 2;
-      var height_ratio                 = 1;
-      var html_string                  = "";
-      var image_height                 = 0;
-      var image_width                  = 0;
-      var image_style                  = "";
-      var max_number_of_images         = 40;
-      var minimum_caption_width        = 285;
-      var nav_button_vertical_position = 0;
-      var one_column_container         = 1;
-      var two_column_container         = 2;
-      var width_ratio                  = 1;
+      var adjusted_image_height         = 0;
+      var adjusted_image_width          = 0;
+      var art_container_class           = "";
+      var art_container_margin          = 35;
+      var art_container_style           = "";
+      var back_button_vertical_position = 5;
+      var caption_div_style             = "";
+      var height_ratio                  = 1;
+      var html_string                   = "";
+      var image_height                  = 0;
+      var image_width                   = 0;
+      var image_style                   = "";
+      var max_number_of_images          = 40;
+      var minimum_caption_width         = 285;
+      var nav_button_vertical_position  = 5;
+      var width_ratio                   = 1;
+      var window_inner_height           = window.innerHeight;
+      var window_inner_width            = window.innerWidth;
 
 
       image_width  = this.naturalWidth;
       image_height = this.naturalHeight;
 
-      width_ratio  = image_width/window.innerWidth;
-      height_ratio = image_height/window.innerHeight;
+      width_ratio  = image_width/window_inner_width;
+      height_ratio = image_height/window_inner_height;
 
       adjusted_image_width  = image_width/height_ratio;
       adjusted_image_height = image_height/width_ratio;
 
-      if (window.innerWidth >= window.innerHeight)
+      // If running in portrait orientation, set up a one column container instead of two.
+
+      if (window_inner_height >= window_inner_width)
       {
-         if (image_height >= image_width)
+         art_container_class = "image_container_one_column";
+         caption_div_style   = "style=\"height: auto\"";
+
+         if (image_width < window_inner_width)
          {
-            container_style = two_column_container;
+            image_style = "style=\"width: "+window_inner_width+"px; height: auto\"";
          }
          else
          {
-            if (adjusted_image_height > window.innerHeight)
-            {
-               container_style = two_column_container;
-            }
-            else
-            {
-               container_style = one_column_container;
-            }
+            image_style = "style=\"width: 100%; height: auto\""; 
          }
+
+         nav_button_vertical_position = image_height * window_inner_width/image_width / 2;
+
+         if (window_inner_width > 655)  // 655 is consistent with "@media only screen and (max-width: 655px) and (orientation: portrait)" in styles.css.
+         {
+            adjusted_image_width = window_inner_width - art_container_margin*2;
+
+            if (adjusted_image_width > 655) adjusted_image_width = 655;
+
+            art_container_style = "style=\"width: "+adjusted_image_width+"px; margin-left: "+art_container_margin+"px; margin-right: "+art_container_margin+"px\"";
+            image_style         = "style=\"width: "+adjusted_image_width+"px; height: auto\"";
+
+            nav_button_vertical_position = window_inner_height / 2;
+         }
+
+         if (nav_button_vertical_position > window_inner_height / 2) nav_button_vertical_position = window_inner_height / 2;
       }
       else
       {
-         if (image_width >= image_height)
+         art_container_class = "image_container_two_column";
+
+         if ( (adjusted_image_width + minimum_caption_width + art_container_margin*2) > (window_inner_width) )
          {
-            container_style = one_column_container;
-         }
-         else
-         {
-            if (adjusted_image_width > window.innerWidth)
+            // Reduce the image width to make room for the image caption.
+
+            adjusted_image_width  = adjusted_image_width - ( (adjusted_image_width + minimum_caption_width + art_container_margin*2) - (window_inner_width) );
+            adjusted_image_height = image_height * (adjusted_image_width/image_width) - 15;  // Not exactly sure why -15.  Maybe to account for caption_div top and/or bottom margins.
+
+            art_container_style = "style=\"margin-left: "+art_container_margin+"px; margin-right: "+art_container_margin+"px; place-content: center\"";
+            image_style         = "style=\"width: "+adjusted_image_width+"px\"";
+            caption_div_style   = "style=\"max-width: 500px; height: "+adjusted_image_height+"px; padding-top: 5px\"";
+
+            back_button_vertical_position = ( (window_inner_height-adjusted_image_height) / 2 ) - 10;  // Not exactly sure why -10.
+
+            if (back_button_vertical_position < 5) back_button_vertical_position = 5;
+
+            if ( (navigator.userAgent.toLowerCase().indexOf("mobile") != -1) && (navigator.platform.toLowerCase().indexOf("ipad") != -1) )
             {
-               container_style = one_column_container;
+               // Make vertical button position adjustments for older iPads.
+
+               if (back_button_vertical_position > 5) back_button_vertical_position += 13;
+
+               nav_button_vertical_position += 13;
+            }
+         }
+         else   
+         {
+            if (CSS.supports('height', '100dvh'))
+            {
+               image_style = "style=\"width: auto; height: 100dvh\"";
             }
             else
             {
-               container_style = two_column_container;
+               image_style = "style=\"width: auto; height: 100vh\"";
             }
-         }
-      }
 
-      if (container_style == two_column_container)
-      {
-         // Image height equals viewport height
-
-         container_class = "image_container_two_column";
-
-         nav_button_vertical_position = window.innerHeight / 2;
-
-         art_caption_style = "style=\"max-width: 500px; padding-top: 5px\"";
-
-         if (CSS.supports('height', '100dvh'))
-         {
-            image_style = "width: auto; height: 100dvh";
-         }
-         else
-         {
-            image_style = "width: auto; height: 100vh";
+            art_container_style = "style=\"margin-left: "+art_container_margin+"px; margin-right: "+art_container_margin+"px\"";
+            caption_div_style   = "style=\"max-width: 500px; padding-top: 5px\"";
          }
 
-         if ( (adjusted_image_width + minimum_caption_width) > (window.innerWidth) )
-         {
-            container_style = one_column_container;
-
-            container_class = "image_container_one_column";
-
-            nav_button_vertical_position = image_height * window.innerWidth/image_width / 2;
-
-            art_caption_style = "style=\"height: auto; padding-left: 10px\"";
-
-            image_style = "width: 100%; height: auto";
-         }
-      }
-      else
-      {
-         // Image width equals viewport width
-
-         container_class = "image_container_one_column";
-
-         nav_button_vertical_position = image_height * window.innerWidth/image_width / 2;
-
-         art_caption_style = "style=\"height: auto\"";
-
-         image_style = "width: 100%; height: auto";
+         nav_button_vertical_position = window_inner_height / 2;
       }
 
-      if (nav_button_vertical_position > window.innerHeight / 2)
-      {
-         nav_button_vertical_position = window.innerHeight / 2;
-      }
-
-      nav_button_vertical_position += "px";
+      back_button_vertical_position += "px";
+      nav_button_vertical_position  += "px";
 
       html_string += '';
       html_string += '';
-      html_string += '<div id="art_container" class="'+container_class+' fade_in">';
+      html_string += '<center><div id="art_container" class="'+art_container_class+' fade_in" '+art_container_style+'">';  // Not sure why I can't find another why to center besides <center>.
       html_string += '';
       html_string += '   <div id="image_div" class="fade_in" style="display: inline-block; position: relative">';
-      html_string += '      <img src="'+this.src+'" style="'+image_style+'">';
-      html_string += '      <button class="nav_button nav_left_offset" style="top: '+nav_button_vertical_position+'" onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\''+max_number_of_images+'\',\'left\');"><div class="nav_left_shape"></div></button>';
-
-      if (container_style == one_column_container)
-      {
-         html_string += '      <button id="nav_right_button" class="nav_button nav_right_offset" style="top: '+nav_button_vertical_position+'" onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\''+max_number_of_images+'\',\'right\');"><div class="nav_right_shape"></div></button>';
-         html_string += '      <button id="back_button" class="back_button" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
-      }
-
+      html_string += '      <img src="'+this.src+'" '+image_style+'">';
       html_string += '   </div>';
       html_string += '';
-      html_string += '   <div id="caption_div" class="art_caption fade_in" '+art_caption_style+'>';
-
-      if (container_style == two_column_container)
-      {
-         html_string += '      <button id="nav_right_button" class="nav_button nav_right_offset" style="position: fixed; top: '+nav_button_vertical_position+'" onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\''+max_number_of_images+'\',\'right\');"><div class="nav_right_shape"></div></button>';
-         html_string += '      <button id="back_button" class="back_button" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
-      }
-
-      html_string += '      <div id="image_caption"></div>';
+      html_string += '   <div id="caption_div" class="art_caption fade_in" '+caption_div_style+'>';
+      html_string += '      <div id="image_caption">';
+      html_string += '        <!-- Load data from file. -->';   
+      html_string += '      </div>';
       html_string += '   </div>';
       html_string += '';
-      html_string += '</div>';
+      html_string += '</div></center>';
+      html_string += '';
+      html_string += '<button class="nav_button nav_left_offset"  style="top: '+nav_button_vertical_position+'"  onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\''+max_number_of_images+'\',\'left\');"><div class="nav_left_shape"></div></button>';
+      html_string += '<button class="nav_button nav_right_offset" style="top: '+nav_button_vertical_position+'"  onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\''+max_number_of_images+'\',\'right\');"><div class="nav_right_shape"></div></button>';
+      html_string += '<button class="back_button"                 style="top: '+back_button_vertical_position+'" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
       html_string += '';
       html_string += '';
 
@@ -262,10 +247,6 @@ function load_data_from_file(file_name,element_id,display_error,scroll_to_exhibi
          {
             if (scroll_to_exhibitions == true) document.getElementById(element_id).scrollIntoView({behavior: "smooth"});
          }
-         else if (element_id == "image_caption")
-         {
-            update_button_positions();
-         }
       },
 
       error: function()
@@ -273,11 +254,6 @@ function load_data_from_file(file_name,element_id,display_error,scroll_to_exhibi
          if (display_error == true) alert("Failed to load data from file:  "+file_name);
 
          document.getElementById(element_id).style.display = "none";
-
-         if (element_id == "image_caption")
-         {
-            update_button_positions();
-         }
       },
    }
    );
@@ -400,43 +376,6 @@ function navigate_to_next_image(gallery_name,image_number,max_number_of_images,d
    else
    {
       check_if_image_exists(gallery_name,image_number+1,max_number_of_images,"right");
-   }
-
-   return true;
-}
-
-function update_button_positions()
-{
-   var div_width    = 0;
-   var extra_width  = 0;
-   var right_offset = 5;
-
-
-   if (document.getElementById("image_div")        == null) return false;
-   if (document.getElementById("caption_div")      == null) return false;
-   if (document.getElementById("back_button")      == null) return false;
-   if (document.getElementById("nav_right_button") == null) return false;
-
-   if (document.getElementById("art_container").classList[0] == "image_container_one_column")
-   {
-      right_offset = right_offset + (document.getElementById("art_container").offsetWidth - document.getElementById("art_container").clientWidth);
-      right_offset += "px";
-
-      document.getElementById("back_button").style.right = right_offset;
-   }
-   else if (document.getElementById("art_container").classList[0] == "image_container_two_column")
-   {
-      div_width   = document.getElementById("image_div").offsetWidth + document.getElementById("caption_div").offsetWidth;
-      extra_width = window.innerWidth - div_width;
-
-      if (extra_width > 0)
-      {
-         right_offset  = (extra_width / 2) + right_offset;
-         right_offset += "px";
-
-         document.getElementById("back_button").style.right      = right_offset;
-         document.getElementById("nav_right_button").style.right = right_offset;      
-      }
    }
 
    return true;
