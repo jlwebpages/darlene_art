@@ -19,12 +19,13 @@
 
    // Perform a hard reload when the device window size or orientation changes.
 
-   window.addEventListener
-   ("resize", function()
-   {
-      location.href = self.location.href;
-   }
-   );
+   window.addEventListener("resize", function() {location.href = self.location.href;});
+
+   // Connect keyboard keys to navigation buttons.
+
+   document.addEventListener("keydown",(event) => {if (event.key === "Backspace")  document.getElementById("nav_back" ).click();});
+   document.addEventListener("keydown",(event) => {if (event.key === "ArrowLeft")  document.getElementById("nav_left" ).click();});
+   document.addEventListener("keydown",(event) => {if (event.key === "ArrowRight") document.getElementById("nav_right").click();});
 
 </script>
 
