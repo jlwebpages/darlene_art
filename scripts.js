@@ -440,7 +440,7 @@ function load_data_from_file(file_name,element_id,display_error,scroll_to_exhibi
 
 function load_image(gallery_name,image_number,image_count,image_sold)
 {
-   var column_count     = window.getComputedStyle(document.getElementById("art_gallery")).columnCount;
+   var column_count     = window.getComputedStyle(document.getElementById("art_gallery")).getPropertyValue("grid-template-columns").split(" ").length;
    var file_name_prefix = gallery_name + "_" + image_number;
    var file_path_prefix = gallery_name + "/" + file_name_prefix;
    var image_html       = "";
