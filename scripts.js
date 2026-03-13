@@ -1,15 +1,17 @@
 // Global variables.
 
+var min_image_number = 0;
 var max_image_number = 0;
 
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
-const gallery_list = [{name: "featured_work",  title: "Featured Work",  max_image_number: 32},
-                      {name: "photo_art",      title: "Photo Art",      max_image_number: 28},
-                      {name: "works_on_paper", title: "Works on Paper", max_image_number:  9}];
+const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 6, max_image_number: 22},
+                      {name: "photo_art",      title: "Photo Art",      min_image_number: 6, max_image_number: 19},
+                      {name: "works_on_paper", title: "Works on Paper", min_image_number: 6, max_image_number: 13},
+                      {name: "sold",           title: "Sold",           min_image_number: 6, max_image_number: 18}];
 
 
-function check_if_image_exists(gallery_name,image_number,max_image_number,direction)
+function check_if_image_exists(gallery_name,image_number,min_image_number,max_image_number,direction)
 {
    $.ajax
    (
@@ -28,12 +30,19 @@ function check_if_image_exists(gallery_name,image_number,max_image_number,direct
             }
             else
             {
-               check_if_image_exists(gallery_name,1,max_image_number,"right");
+               check_if_image_exists(gallery_name,min_image_number,min_image_number,max_image_number,"right");
             }
          }
          else
          {
-            display_image_with_caption(gallery_name+"/"+gallery_name+"_"+image_number+".jpg",gallery_name,image_number);
+            if (image_number >= min_image_number)
+            {
+               display_image_with_caption(gallery_name+"/"+gallery_name+"_"+image_number+".jpg",gallery_name,image_number);
+            }
+            else
+            {
+               check_if_image_exists(gallery_name,max_image_number,min_image_number,max_image_number,"left");
+            }
          }
 
          return true;
@@ -45,52 +54,24 @@ function check_if_image_exists(gallery_name,image_number,max_image_number,direct
          {
             if (image_number+1 <= max_image_number)
             {
-               check_if_image_exists(gallery_name,image_number+1,max_image_number,"right");
+               check_if_image_exists(gallery_name,image_number+1,min_image_number,max_image_number,"right");
             }
             else
             {
-               check_if_image_exists(gallery_name,1,max_image_number,"right");
+               check_if_image_exists(gallery_name,min_image_number,min_image_number,max_image_number,"right");
             }
          }
          else
          {
-            if (image_number-1 >= 1)
+            if (image_number-1 >= min_image_number)
             {
-               check_if_image_exists(gallery_name,image_number-1,max_image_number,"left");
+               check_if_image_exists(gallery_name,image_number-1,min_image_number,max_image_number,"left");
             }
             else
             {
-               check_if_image_exists(gallery_name,max_image_number,max_image_number,"left");
+               check_if_image_exists(gallery_name,max_image_number,min_image_number,max_image_number,"left");
             }
          }
-      },
-   }
-   );
-
-   return false;
-}
-
-function check_if_image_sold(gallery_name,image_number,max_image_number,image_count)
-{
-   $.ajax
-   (
-   {
-      url: gallery_name+"/"+gallery_name+"_"+image_number+"_caption.txt",
-
-      dataType: "html",
-
-      success: function(data)
-      {
-         image_sold = false;
-
-         if (data.includes("sold_text") == true) image_sold = true;
-
-         load_image(gallery_name,image_number,image_count+1,image_sold);
-      },
-
-      error: function()
-      {
-         load_image(gallery_name,image_number,image_count+1,false);
       },
    }
    );
@@ -265,7 +246,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
       // Update the browser address field
 
-      window.history.replaceState({}, document.title, window.location.pathname+"?image_file_name="+image_file_name+"&max_image_number="+max_image_number);
+      window.history.replaceState({}, document.title, window.location.pathname+"?image_file_name="+image_file_name+"&min_image_number="+min_image_number+"&max_image_number="+max_image_number);
 
       return true;
    }
@@ -357,6 +338,7 @@ function get_image_url_parameters()
    html_file_name = html_path_segments[html_path_segments.length - 1];
 
    image_file_name = URL_parameters.get("image_file_name");
+   min_image_number = URL_parameters.get("min_image_number");  // Assign global variable;
    max_image_number = URL_parameters.get("max_image_number");  // Assign global variable;
 
    if ( (image_file_name == null) || (image_file_name == "") )
@@ -366,12 +348,23 @@ function get_image_url_parameters()
       history.back();
    }
 
+   if ( (min_image_number == null) || (min_image_number == "") )
+   {
+      alert("Error:\n\nInvalid Min Image Number passed to " + html_file_name);
+
+      history.back();
+   }
+
+   min_image_number = parseInt(min_image_number);
+
    if ( (max_image_number == null) || (max_image_number == "") )
    {
       alert("Error:\n\nInvalid Max Image Number passed to " + html_file_name);
 
       history.back();
    }
+
+   max_image_number = parseInt(max_image_number);
 
    index = image_file_name.indexOf("/");
 
@@ -438,7 +431,7 @@ function load_data_from_file(file_name,element_id,display_error,scroll_to_exhibi
    return true;
 }
 
-function load_image(gallery_name,image_number,image_count,image_sold)
+function load_image(gallery_name,image_number,image_count)
 {
    var column_count     = window.getComputedStyle(document.getElementById("art_gallery")).getPropertyValue("grid-template-columns").split(" ").length;
    var file_name_prefix = gallery_name + "_" + image_number;
@@ -464,10 +457,15 @@ function load_image(gallery_name,image_number,image_count,image_sold)
       document.getElementById("three_column_3").style.display = "block";
    }
 
-   if (true)               image_html += '<div class="art_image_link_container">\n';
-   if (true)               image_html += '   <a class="art_image_link" href="display_image.html?image_file_name='+image_path+'&max_image_number='+max_image_number+'" target="_self"><img src="'+image_path+'" class="art_image border_radius"></a>\n';
-   if (image_sold == true) image_html += '   <div id="solld_tag" class="sold_tag">SOLD</div>\n';
-   if (true)               image_html += '</div>\n';
+   image_html += '<div class="art_image_link_container">\n';
+   image_html += '   <a class="art_image_link" href="display_image.html?image_file_name='+image_path+'&min_image_number='+min_image_number+'&max_image_number='+max_image_number+'" target="_self"><img src="'+image_path+'" class="art_image border_radius"></a>\n';
+
+   if (gallery_name.toLowerCase().includes("sold") == true)
+   {
+      image_html += '   <div id="solld_tag" class="sold_tag">SOLD</div>\n';
+   }
+
+   image_html += '</div>\n';
 
    document.getElementById("one_column_1").insertAdjacentHTML("beforeend",image_html);
 
@@ -518,7 +516,7 @@ function load_image_into_gallery(gallery_name,image_number,max_image_number,imag
 
       success: function()
       {
-         check_if_image_sold(gallery_name,image_number,max_image_number,image_count);
+         load_image(gallery_name,image_number,image_count+1);
       },
 
       error: function()
@@ -534,9 +532,10 @@ function load_image_into_gallery(gallery_name,image_number,max_image_number,imag
 function load_images_into_gallery(gallery_index)
 {
    var image_count  = 0;
-   var image_number = 1;
+   var image_number = gallery_list[gallery_index]["min_image_number"];
 
 
+   min_image_number = gallery_list[gallery_index]["min_image_number"];
    max_image_number = gallery_list[gallery_index]["max_image_number"];
 
    document.getElementById("art_gallery").insertAdjacentHTML("beforebegin","<div id='gallery_header' class='header_link' style='text-align: center; margin-bottom: 25px; display: none'>"+gallery_list[gallery_index]["title"]+"</div>");
@@ -552,12 +551,12 @@ function navigate_to_next_image(gallery_name,image_number,direction)
 
    if (direction == "right")
    {
-      check_if_image_exists(gallery_name,image_number+1,max_image_number,"right");
+      check_if_image_exists(gallery_name,image_number+1,min_image_number,max_image_number,"right");
 
    }
    else
    {
-      check_if_image_exists(gallery_name,image_number-1,max_image_number,"left");
+      check_if_image_exists(gallery_name,image_number-1,min_image_number,max_image_number,"left");
    }
 
    return true;

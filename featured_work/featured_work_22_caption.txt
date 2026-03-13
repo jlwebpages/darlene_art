@@ -2,7 +2,7 @@
 
 <span class="art_title">
 
-Coastal Living
+After the Wildfire
 
 </span>
 
@@ -11,7 +11,7 @@ Coastal Living
 
 <span class="art_dimensions">
 
-Each piece is 20 x 20 inches on 1.5-inch cradled wood panel
+8 x 8 inch cradled wood panels
 
 </span>
 
@@ -20,12 +20,10 @@ Each piece is 20 x 20 inches on 1.5-inch cradled wood panel
 
 <span class="art_paragraph">
 
-On the coast, the bright sunlight desaturates and bleaches many of the surfaces it touches. At the beach, space and textures can feel amplified.
+In 2017, Canyon Fire 2 devastated the parks I hike on almost a daily basis. Since then, I’ve witnessed their recovery - but there are still remnants of charred trees and cacti visible here and there. There was beauty in the recovery, even in the early days, when bits of bright green grass poked bravely up through the blackened earth.
 
 </span>
 
-<span class="art_paragraph" style="padding-top: 10px"><b>Beach Day</b> (left)</span>
+<span class="art_paragraph" style="padding-top: 10px"><b>After the Wildfire 1</b> (left)</span>
 
-<span class="art_paragraph" style="padding-top: 0px"><b>Dockside</b> (top right)</span>
-
-<span class="art_paragraph" style="padding-top: 0px"><b>Coastline</b> (bottom right)</span>
+<span class="art_paragraph" style="padding-top: 0px"><b>After the Wildfire 2</b> (right)</span>
