@@ -5,7 +5,7 @@ var max_image_number = 0;
 
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
-const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 4, max_image_number: 22, new_list: [4,5,6,7,8]},
+const gallery_list = [{name: "featured_work",  title: "Gallery",        min_image_number: 3, max_image_number: 22, new_list: [3,4,5,6,7,8]},
                       {name: "photo_art",      title: "Photo Art",      min_image_number: 6, max_image_number: 16, new_list: [6]},
                       {name: "works_on_paper", title: "Works on Paper", min_image_number: 6, max_image_number: 11, new_list: [0]},
                       {name: "sold",           title: "Sold",           min_image_number: 1, max_image_number: 19, new_list: [0]}]
@@ -83,6 +83,56 @@ function close_menu()
 {
    document.getElementById("menu_list").style.width   = "0px";
    document.getElementById("menu_list").style.padding = "50px 0px 15px 0px";
+
+   return true;
+}
+
+function display_contact_page(image_caption_file_name,direction,display_error)
+{
+   $.ajax
+   (
+   {
+      url: image_caption_file_name,
+
+      dataType: "html",
+
+      success: function(data)
+      {
+         var image_file_name = "";
+         var image_title     = "";
+
+
+         image_file_name = image_caption_file_name.replace("_caption.txt",".jpg");
+
+         // Extract image title from image caption data.
+
+         start_after = '<span class="art_title">';
+         end_before  = '</span>';
+
+         start_index = data.indexOf(start_after) + start_after.length;
+         end_index   = data.indexOf(end_before);
+
+         image_title = data.substring(start_index, end_index);
+         image_title = image_title.trim();
+
+         window.location.href = "contact.html?image_file_name="+image_file_name+"&image_title="+image_title;
+      },
+
+      error: function()
+      {
+         if (image_caption_file_name.includes("contact.txt") == true)
+         {
+            image_file_name = image_caption_file_name.replace(".txt",".jpg");
+
+            window.location.href = "contact.html?image_file_name="+image_file_name+"&image_title=";
+         }
+         else
+         {
+            update_contact_image(image_caption_file_name.replace("_caption.txt",".jgp"),direction);
+         }
+      },
+   }
+   );
 
    return true;
 }
@@ -188,9 +238,9 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
             if (back_button_vertical_position < 5) back_button_vertical_position = 5;
 
-            if ( (navigator.userAgent.toLowerCase().indexOf("mobile") != -1) && (navigator.platform.toLowerCase().indexOf("ipad") != -1) )
+            if (is_older_iPad() == true)
             {
-               // Make vertical button position adjustments for older iPads.
+               // Make vertical button position adjustments.
 
                if (back_button_vertical_position > 5) back_button_vertical_position += 13;
 
@@ -259,7 +309,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 function display_menu()
 {
    document.getElementById("menu_list").style.width   = "160px";
-   document.getElementById("menu_list").style.height  = 110 + (gallery_list.length * 40) + "px";
+   document.getElementById("menu_list").style.height  = 150 + (gallery_list.length * 40) + "px";
    document.getElementById("menu_list").style.padding = "50px 30px 15px 20px";
 
    return true;
@@ -392,7 +442,37 @@ function get_image_url_parameters()
    return {image_file_name,gallery_name,image_number}; 
 }
 
-function load_data_from_file(file_name,element_id,title_extension,scroll_to_exhibitions,display_error)
+function is_iPad()
+{
+   if ( (navigator.platform.toLowerCase().indexOf("ipad") != -1) || ((navigator.platform.toLowerCase().indexOf("macintel") != -1) && (navigator.maxTouchPoints > 1)) )
+   {
+      return true;
+   }
+
+   return false;
+}
+
+function is_mobile()
+{
+   if ( (navigator.userAgent.toLowerCase().indexOf("mobile") != -1) && (navigator.platform.toLowerCase().indexOf("ipad") == -1) )
+   {
+      return true;
+   }
+
+   return false;
+}
+
+function is_older_iPad()
+{
+   if ( (navigator.userAgent.toLowerCase().indexOf("mobile") != -1) && (navigator.platform.toLowerCase().indexOf("ipad") != -1) )
+   {
+      return true;
+   }
+
+   return false;
+}
+
+function load_data_from_file(gallery_name,file_name,element_id,title_extension,scroll_to_exhibitions,display_error)
 {
    $.ajax
    (
@@ -405,9 +485,27 @@ function load_data_from_file(file_name,element_id,title_extension,scroll_to_exhi
       {
          if (element_id == "image_caption")
          {
-            // Add title extension to image caption data.
+            // Extract image title from image caption data.
+
+            start_after = '<span class="art_title">';
+            end_before  = '</span>';
+
+            start_index = data.indexOf(start_after) + start_after.length;
+            end_index   = data.indexOf(end_before);
+
+            image_title = data.substring(start_index, end_index);
+            image_title = image_title.trim();
+
+            // Add title extension to image title in image caption data.
 
             data = data.replace("</span>",title_extension+"</span>")
+
+            if (gallery_name != "sold")
+            {
+               var image_file_name = file_name.replace("_caption.txt",".jpg");
+
+               data += '<a class="general_link inquire_link" href="contact.html?image_file_name='+image_file_name+'&image_title='+image_title+'">Contact for price</a>';
+            }
          }
 
          document.getElementById(element_id).textContent = "";
@@ -418,7 +516,7 @@ function load_data_from_file(file_name,element_id,title_extension,scroll_to_exhi
             file_name  = file_name.replace("about.txt","exhibitions.txt");
             element_id = element_id.replace("about_text","exhibitions_text");
 
-            load_data_from_file(file_name,element_id,title_extension,scroll_to_exhibitions,display_error);
+            load_data_from_file(gallery_name,file_name,element_id,title_extension,scroll_to_exhibitions,display_error);
          }
          else if (element_id == "exhibitions_text")
          {
@@ -544,7 +642,7 @@ function load_image_caption(gallery_name,image_number)
       title_extension = '<span class="sold_text"> sold</span>';
    }
 
-   load_data_from_file(image_file_name,"image_caption",title_extension,false,true);
+   load_data_from_file(gallery_name,image_file_name,"image_caption",title_extension,false,true);
 
    return true;
 }
@@ -582,8 +680,6 @@ function load_images_into_gallery(gallery_index)
    min_image_number = gallery_list[gallery_index]["min_image_number"];
    max_image_number = gallery_list[gallery_index]["max_image_number"];
 
-   document.getElementById("art_gallery").insertAdjacentHTML("beforebegin","<div id='gallery_header' class='header_link' style='text-align: center; margin-bottom: 25px; display: none'>"+gallery_list[gallery_index]["title"]+"</div>");
-
    load_image_into_gallery(gallery_list[gallery_index]["name"],image_number,max_image_number,image_count);
 
    return true;
@@ -604,6 +700,169 @@ function navigate_to_next_image(gallery_name,image_number,direction)
    }
 
    return true;
+}
+
+function send_contact_email()
+{
+   var email         = "mailto:";
+   var email_address = "dkclaguna@gmail.com";
+   var email_subject = "?subject=Darlene Laguna Art";
+   var email_text    = "&body=";
+
+
+   if (image_title != "") email_subject += " - " + image_title;
+
+   email_text += document.getElementById("contact_email_message").value;
+
+   if (document.getElementById("contact_email_checkbox").checked == true) email_text += "\n\nAdd me to your email list.";
+
+   email += email_address + email_subject + email_text;
+
+   window.open(encodeURI(email),"_self");
+}
+
+function set_size_and_position_of_contact_page_elements()
+{
+   var contact_email_container_element_heights = 0;
+   var contact_image                           = null;
+   var contact_image_width                     = 0;
+   var min_contact_image_width_percent         = .60;
+   var scale                                   = 0;
+
+
+   contact_image       = document.querySelector("#contact_image");
+   scale               = contact_image.height / contact_image.naturalHeight;
+   contact_image_width = scale * contact_image.naturalWidth;
+
+   // Set image_container width equal to contact_image width.
+
+   document.getElementById("image_container").style.width = contact_image_width + "px";
+
+   // Calculate and set contact_email_message text area height.
+
+   contact_email_container_element_heights  = document.getElementById("contact_email_subject").offsetHeight;
+   contact_email_container_element_heights += document.getElementById("contact_email_checkbox_label").offsetHeight;
+   contact_email_container_element_heights += document.getElementById("contact_email_send_button").offsetHeight;
+
+   if (document.getElementById("contact_text") != null)
+   {
+      contact_email_container_element_heights += document.getElementById("contact_text").offsetHeight;
+   }
+
+   contact_email_container_element_heights += 8;  // Fine tune.
+
+   document.getElementById("contact_email_message").style.height = "calc(100% - " + contact_email_container_element_heights + "px)";
+
+   if (window.innerHeight >= window.innerWidth)
+   {
+      // We're in portrait orientation.
+
+      if (is_iPad() == true)
+      {
+
+         // Ensure contact_image width and email_messasge_container elements are at least 70%.
+
+         if ( (contact_image_width/window.innerWidth) < min_contact_image_width_percent)
+         {
+            contact_image_width = min_contact_image_width_percent * window.innerWidth;
+
+            document.getElementById("image_container").style.width     = contact_image_width + "px";
+            document.getElementById("contact_image"  ).style.width     = contact_image_width + "px";
+            document.getElementById("contact_image"  ).style.maxHeight = "none";
+         }
+
+         if (document.getElementById("contact_text") != null)
+         {
+            document.getElementById("contact_text").style.width = contact_image_width + "px";
+         }
+
+         document.getElementById("contact_email_subject").style.width = contact_image_width + "px";
+         document.getElementById("contact_email_message").style.width = contact_image_width + "px";
+         document.getElementById("checkbox_container"   ).style.width = contact_image_width + "px";
+      }
+      else if (is_mobile() == true)
+      {
+         // Set vertical position of left and right navigation buttons to center of comtact_image.
+
+         document.getElementById("nav_left").style.top  = ( document.getElementById("contact_image").getBoundingClientRect().top + (contact_image.height/2) ) + "px";
+         document.getElementById("nav_right").style.top = ( document.getElementById("contact_image").getBoundingClientRect().top + (contact_image.height/2) ) + "px";
+      }
+   }
+}
+
+function update_contact_image(image_file_name,direction)
+{
+   var contact_image_file_name = "./about/contact.jpg";
+   var gallery_index           = -1;
+   var gallery_name            = image_file_name.split("/")[1];
+   var image_caption_file_name = "";
+   var image_number            = image_file_name.replace(/\D/g, "");
+   var min_gallery_index       = 0;
+   var max_gallery_index       = gallery_list.length -2;  // Use -2 instead of -1 to exclude "Sold" gallery.
+
+
+   for (i = 0; i < gallery_list.length; i++)
+   {
+      if (gallery_name == gallery_list[i]["name"])
+      {
+         gallery_index = i;
+
+         break;
+      }
+   }
+
+   if (image_file_name == contact_image_file_name)
+   {
+      if (direction == "right")
+      {
+         image_caption_file_name = "./" + gallery_list[min_gallery_index]["name"] + "/" + gallery_list[min_gallery_index]["name"] + "_" + gallery_list[min_gallery_index]["min_image_number"] + "_caption.txt";
+      }
+      else  // direction == "left"
+      {
+         image_caption_file_name = "./" + gallery_list[max_gallery_index]["name"] + "/" + gallery_list[max_gallery_index]["name"] + "_" + gallery_list[max_gallery_index]["max_image_number"] + "_caption.txt";
+      }
+   }
+   else
+   {
+      if (direction == "right")
+      {
+         if (image_number < gallery_list[gallery_index]["max_image_number"])
+         {
+            image_caption_file_name = "./" + gallery_name + "/" + gallery_name + "_" + (parseInt(image_number,10)+1) + "_caption.txt";
+         }
+         else  // image number == gallery_list[gallery_index]["max_image_number"]
+         {
+            if (gallery_index == max_gallery_index)
+            {
+               image_caption_file_name = contact_image_file_name.replace(".jpg",".txt");
+            }
+            else
+            {
+               image_caption_file_name = "./" + gallery_list[gallery_index+1]["name"] + "/" + gallery_list[gallery_index+1]["name"] + "_" + gallery_list[gallery_index+1]["min_image_number"] + "_caption.txt";
+            }
+         }
+      }
+      else  // direction == "left"
+      {
+         if (image_number > gallery_list[gallery_index]["min_image_number"])
+         {
+            image_caption_file_name = "./" + gallery_name + "/" + gallery_name + "_" + (parseInt(image_number,10)-1) + "_caption.txt";
+         }
+         else  // image number == gallery_list[gallery_index]["min_image_number"]
+         {
+            if (gallery_index == min_gallery_index)
+            {
+               image_caption_file_name = contact_image_file_name.replace(".jpg",".txt");
+            }
+            else
+            {
+               image_caption_file_name = "./" + gallery_list[gallery_index-1]["name"] + "/" + gallery_list[gallery_index-1]["name"] + "_" + gallery_list[gallery_index-1]["max_image_number"] + "_caption.txt";
+            }
+         }
+      }
+   }
+
+   display_contact_page(image_caption_file_name,direction,true);
 }
 
 function write_footer()
@@ -637,8 +896,9 @@ function write_header()
    {
       d.writeln('   <a href="art_gallery.html?gallery_index='+i+'" tabindex="-1">'+gallery_list[i]["title"]+'</a>');
    }
-   d.writeln('   <a href="about.html" tabindex="-1">About</a>');
-   d.writeln('   <div style="border-top: 1px solid darkslategray; margin: 10px 0px 0px 10px; white-space: nowrap" tabindex="-1">');
+   d.writeln('   <a href="about.html"                                                    tabindex="-1">About  </a>');
+   d.writeln('   <a href="contact.html?image_file_name=./about/contact.jpg&image_title=" tabindex="-1">Contact</a>');
+   d.writeln('   <div style="border-top: 1px solid #444444; margin: 10px 0px 0px 10px; white-space: nowrap" tabindex="-1">');
    d.writeln('      <a href="mailto:dkclaguna@gmail.com?subject=Darlene Laguna Art" title="Email"     style="display: inline-block" tabindex="-1"><img src="email_icon.png"     height="15px" style="margin: 15px 0px 0px -10px"></a>');
    d.writeln('      <a href="https://www.instagram.com/dklaguna_art"                title="Instagram" style="display: inline-block" tabindex="-1"><img src="instagram_icon.png" height="16px"                                   ></a>');
    d.writeln('   </div>');
@@ -651,7 +911,8 @@ function write_header()
    {
       d.writeln('   <a id="'+gallery_list[i]["name"]+'_link"  class="header_link" href="art_gallery.html?gallery_index='+i+'">'+gallery_list[i]["title"]+'</a>');
    }
-   d.writeln('   <a id="about_link"          class="header_link" href="about.html"         >About</a>');
+   d.writeln('   <a id="about_link"   class="header_link" href="about.html"                                                   >About</a>');
+   d.writeln('   <a id="contact_link" class="header_link" href="contact.html?image_file_name=./about/contact.jpg&image_title=">Contact</a>');
    d.writeln('</div>');
    d.writeln('');
    d.writeln('');

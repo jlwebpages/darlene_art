@@ -1,37 +1,8 @@
-<!--
+<hr style="color: #444444; margin-bottom: 30px">
 
-<span class="sub_title" style="padding-bottom: 25px !important">CURRENT EXHIBITION</span><br>
+<span class="exhibitions_title" style="padding-bottom: 25px !important">EXHIBITIONS</span><br>
 
-<span style="line-height: 1.25">
-
-<span style="font-size: 16px; font-weight: bold; margin-bottom: 5px; display: inline-block">
-Specimens + Perceptions
-</span><br>
-
-<span style="font-style: italic; margin-bottom: 5px; display: inline-block">
-Marinés Adrianza and Darlene Laguna<br>
-January 10 to February 7, 2026<br>
-Opening Reception January 10<sup>th</sup> from 6 to 9 PM
-</span><br>
-
-Gallery: <a class="general_link" href="https://www.thelmfla.org">The Language Mobilization Factory Gallery + Darkroom</a><br>
-Location: <a class="general_link" href="https://www.google.com/maps/place/The+LMF+Gallery+and+Darkroom/@34.1629416,-118.0528678,17z/data=!3m1!4b1!4m6!3m5!1s0x80c2dd8ddf586b09:0xf700ae5a325e54a5!8m2!3d34.1629416!4d-118.0528678!16s%252Fg%252F11lvg9c24c">55 North Baldwin Avenue, Sierra Madre, CA 91024</a><br>
-
-</span>
-
-<iframe allowfullscreen allow="autoplay" style="border: 0px; margin: 0px; padding: 10px 0px; 15px; 0px; width: 25%; min-width: 300px; aspect-ratio: 16 / 9"
-    src="https://www.youtube-nocookie.com/embed/BxngEykgEIE?autoplay=1&mute=1&playlist=BxngEykgEIE&loop=1&rel=0">
-</iframe>
-
-<br>
-
-<br>
-
--->
-
-<span class="sub_title" style="padding-bottom: 25px !important">EXHIBITIONS</span><br>
-
-<a class="general_link" href="http://www.galleryofhermosa.com/colors-of-the-coast"><span style="font-size: 16px; font-weight: bold">Colors of the Coast Group Exhibit</span></a><br>
+<a class="general_link" href="https://www.galleryofhermosa.com/warehouse-originals-limited-editions-standard-products/original_art_products/dockside-by-darlene-laguna?product_gallery=569920&product_id=8788299"><span style="font-size: 16px; font-weight: bold">Colors of the Coast Group Exhibit</span></a><br>
 Gallery of Hermosa<br>
 Hermosa Beach, CA<br>
 May 23 to June 14 2026<br>

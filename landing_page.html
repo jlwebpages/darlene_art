@@ -15,50 +15,30 @@
 
 <div id="landing_container" class="landing_container">
 
-   <div class="landing_title">DARLENE LAGUNA</div>
+   <div class="landing_title">
+      DARLENE LAGUNA
+   </div>
 
-   <div class="landing_sub_title">MIXED MEDIA</div>
+   <div class="landing_sub_title">
+      MIXED MEDIA ARTIST
+   </div>
 
-   <!--
-   <button id="landing_exhibition_button" class="landing_exhibition_button" onclick="location.href='about.html?mode=upcoming_exhibition'">At the LMF Gallery + Darkroom<br>January 10 to February 7</button>
-   -->
+   <div class="landing_text">
+      Landscape inspires me to investigate perceptions of space, distance, and connection.
+      Working in layers and without expectations for a specific outcome, I apply acrylic paint,
+      collage, and elements of my photography to develop paintings on wood panel, canvas, and paper.
+      I use texture, color, shape, and line to abstract and suggest depth and a sense of place.
+      <span style="display: block; font-style: italic; margin-top: 15px">Thank you for taking a look at my work.</span>
+   </div>
 
-   <button class="landing_enter_button" onclick="location.href='art_gallery.html?gallery_index=0'">enter</button>
+   <div class="landing_button_container">
+      <button class="landing_button" onclick="location.href='art_gallery.html?gallery_index=0'"                             >Art Gallery</button>
+      <button class="landing_button" onclick="location.href='about.html?mode=upcoming_exhibition'"                          >Exhibitions</button>
+      <button class="landing_button" onclick="location.href='about.html'"                                                   >About</button>
+      <button class="landing_button" onclick="location.href='contact.html?image_file_name=./about/contact.jpg&image_title='">Contact</button>
+   </div>
 
 </div>
-
-<script>
-
-   if ( (navigator.userAgent.toLowerCase().indexOf("mobile") != -1) && (navigator.platform.toLowerCase().indexOf("ipad") == -1) )  // This is a mobile device.
-   {
-      if (document.getElementById("landing_exhibition_button") != null)
-      {
-         document.getElementById("landing_container").style.paddingTop = "10vh";
-      }
-
-      // Reset landing_container padding-top style if the user switches to portrait orientation from landscape orientation.
-
-      mediaQuery = window.matchMedia("(orientation: portrait)");
-
-      function respond_to_portrait_orientation(event)
-      {
-         if (event.matches)
-         {
-            if (document.getElementById("landing_exhibition_button") != null)
-            {
-               document.getElementById("landing_container").style.paddingTop = "10vh";
-            }
-            else
-            {
-               document.getElementById("landing_container").style.paddingTop = "20vh";
-            }
-         }
-      } 
-
-      mediaQuery.addEventListener("change", respond_to_portrait_orientation);
-   }
-
-</script>
 
 
 </body>
