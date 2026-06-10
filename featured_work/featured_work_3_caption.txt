@@ -30,6 +30,9 @@ Spring is almost over and the heat of summer looms ahead. Flowerbeds are explodi
 
 </span>
 
-<span class="art_paragraph" style="padding-top: 10px"><b>Sweet Spot</b> (top)</span>
 
-<span class="art_paragraph" style="padding-top: 0px"><b>Spring Fiesta</b> (bottom)</span>
+<div style="height: 10px"></div>
+
+<span class="art_paragraph"><b>Sweet Spot</b> (top)</span>
+
+<span class="art_paragraph"><b>Spring Fiesta</b> (bottom)</span>
