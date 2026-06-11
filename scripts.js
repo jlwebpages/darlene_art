@@ -6,7 +6,7 @@ var max_image_number = 0;
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
 const gallery_list = [{name: "featured_work",  title: "Gallery",        min_image_number: 3, max_image_number: 22, new_list: [3,4,5]},
-                      {name: "photo_art",      title: "Photo Art",      min_image_number: 6, max_image_number: 16, new_list: [6]},
+                      {name: "photo_art",      title: "Photo Art",      min_image_number: 6, max_image_number: 16, new_list: [0]},
                       {name: "works_on_paper", title: "Works on Paper", min_image_number: 6, max_image_number: 11, new_list: [0]},
                       {name: "sold",           title: "Sold",           min_image_number: 1, max_image_number: 19, new_list: [0]}]
 
@@ -211,7 +211,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
             if (adjusted_image_width > 655) adjusted_image_width = 655;
 
-            art_container_style = "style=\"width: "+adjusted_image_width+"px; margin-left: "+art_container_margin+"px; margin-right: "+art_container_margin+"px\"";
+            art_container_style = "style=\"width: "+adjusted_image_width+"px; margin: 0px auto\"";
             image_style         = "style=\"width: "+adjusted_image_width+"px; height: auto\"";
 
             nav_button_vertical_position = window_inner_height / 2;
@@ -270,7 +270,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
       html_string += '';
       html_string += '';
-      html_string += '<center><div id="art_container" class="'+art_container_class+' fade_in" '+art_container_style+'">';  // Not sure why I can't find another why to center besides <center>.
+      html_string += '<div id="art_container" class="'+art_container_class+' fade_in" '+art_container_style+'">';
       html_string += '';
       html_string += '   <div id="image_div" class="fade_in" style="display: inline-block; position: relative">';
       html_string += '      <img src="'+this.src+'" '+image_style+'">';
@@ -282,7 +282,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
       html_string += '      </div>';
       html_string += '   </div>';
       html_string += '';
-      html_string += '</div></center>';
+      html_string += '</div>';
       html_string += '';
       html_string += '<button id="nav_back"  class="back_button"                 style="top: '+back_button_vertical_position+'" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
       html_string += '<button id="nav_left"  class="nav_button nav_left_offset"  style="top: '+nav_button_vertical_position+'"  onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\'left\');"><div class="nav_left_shape"></div></button>';
