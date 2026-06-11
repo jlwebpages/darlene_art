@@ -749,7 +749,7 @@ function set_size_and_position_of_contact_page_elements()
       contact_email_container_element_heights += document.getElementById("contact_text").offsetHeight;
    }
 
-   contact_email_container_element_heights += 8;  // Fine tune.
+   contact_email_container_element_heights += 6;  // Fine tune.
 
    document.getElementById("contact_email_message").style.height = "calc(100% - " + contact_email_container_element_heights + "px)";
 
@@ -922,11 +922,11 @@ function write_header()
 
    if (is_older_iPad() == true)
    {
-      d.getElementById("menu_button").style.fontSize = "40px";
+      d.getElementById("menu_button").style.fontSize = "35px";
    }
    else if (is_iPad() == true)
    {
-      d.getElementById("menu_button").style.fontSize = "55px";
+      d.getElementById("menu_button").style.fontSize = "50px";
    }
 
    return true;
