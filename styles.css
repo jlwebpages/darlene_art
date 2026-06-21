@@ -41,6 +41,9 @@
    .contact_email_container          {padding:               15px                      !important}
    .contact_email_container          {width:                 auto                      !important}
    .contact_email_message            {height:                300px                     !important}
+   .scroll_button                    {transform:             scale(90%)                !important}
+   .scroll_button                    {bottom:                5px                       !important}
+   .scroll_button                    {right:                 5px                       !important}
    #thank_you                        {margin-top:            20px                      !important}
    #gallery_header                   {display:               block                     !important}
    #one_column_1                     {display:               block                     !important}
@@ -86,6 +89,9 @@
    .contact_image             {max-width:             500px               !important}
    .contact_email_container   {padding:               15px                !important}
    .contact_email_container   {width:                 75%                 !important}
+   .scroll_button             {transform:             scale(90%)          !important}
+   .scroll_button             {bottom:                5px                 !important}
+   .scroll_button             {right:                 5px                 !important}
    #thank_you                 {margin-top:            10px                !important}
    #gallery_header            {display:               block               !important}
    #one_column_1              {display:               none                !important}
@@ -126,6 +132,8 @@
    .contact_email_container  {width:                 auto                !important}
    .contact_email_container  {padding-top:           10px                !important}
    .contact_email_message    {height:                300px               !important}
+   .scroll_button            {bottom:                15px                !important}
+   .scroll_button            {right:                 15px                !important}
    #gallery_header           {display:               block               !important}
    #one_column_1             {display:               none                !important}
    #two_column_1             {display:               block               !important}
@@ -151,6 +159,8 @@
    .art_image_link_container {margin-bottom:         20px        !important}
    .about_image_container    {width:                 50%         !important}
    .contact_image            {max-width:             600px       !important}
+   .scroll_button            {bottom:                15px        !important}
+   .scroll_button            {right:                 15px        !important}
    #one_column_1             {display:               none        !important}
    #two_column_1             {display:               none        !important}
    #two_column_2             {display:               none        !important}
@@ -165,6 +175,7 @@
 {
    .image_container_one_column {height: 100dvh !important}
    .image_container_two_column {height: 100dvh !important}
+   .landing_body               {height: 100dvh !important}
 }
 
 @keyframes fade-in
@@ -192,6 +203,7 @@
    padding: 0px;
    height: 100vh;
 }
+
 .landing_container
 {
    display: flex;
@@ -553,7 +565,8 @@ a.header_link:hover
    font-size: 20px;
    font-weight: bold;
    color: black;
-   background-color: rgba(255, 255, 255, 75%);
+   background-color: white;
+   opacity: 0.75;
    border-radius: 4px;
    border-width: 0px;
    padding: 0px 5px 0px 5px;
@@ -562,7 +575,7 @@ a.header_link:hover
 
 .back_button:hover
 {
-   background-color: rgba(255, 255, 255, 50%);
+   opacity: 0.5;
 }
 
 .nav_button
@@ -577,7 +590,7 @@ a.header_link:hover
    height: 52px;
    width: 18px;
    background-color: white;
-   opacity: 75%;
+   opacity: 0.75;
    border-radius: 4px;
    border: 0px;
    margin: 0px;
@@ -587,7 +600,7 @@ a.header_link:hover
 
 .nav_button:hover
 {
-   opacity: 50%;
+   opacity: 0.5;
 }
 
 .nav_left_offset
@@ -620,6 +633,45 @@ a.header_link:hover
    border-left: 10.5px solid black;
    margin: 0px auto;
    transform: scale(1);
+}
+
+.scroll_button
+{
+   cursor: pointer;
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   font-size: 30px;
+   font-weight: bold;
+   height: 40px;
+   width: 40px;
+   background-color: black;
+   opacity: 0.6;
+   border: 0px;
+   margin: 0px;
+   padding: 0px;
+   transform-origin: bottom right;
+   visibility: hidden;
+   z-index: 2;
+}
+
+@media (hover: hover)
+{
+   .scroll_button:hover
+   {
+      opacity: 0.9;
+   }
+}
+
+.scroll_shape
+{
+   border: solid white;
+   border-width: 0px 4px 4px 0px;
+   margin: 0px;
+   padding: 6px;
+   transform: rotate(-135deg);
+   vertical-align: middle;
+   display: inline-block;
 }
 
 .image_container_one_column
@@ -714,7 +766,7 @@ a.header_link:hover
 .contact_email_checkbox
 {
   accent-color: black;
-  opacity: 75%;
+  opacity: 0.75;
   border: 0px;
   margin: 0px;
   padding: 0px;
@@ -737,12 +789,17 @@ a.header_link:hover
    color: white;
    letter-spacing: 1px;
    background-color: black;
-   opacity: 75%;
+   opacity: 0.75;
    border-radius: 2px;
    border: 0px;
    margin: 0px auto;
    padding: 2px;
    display:inline-block;
+}
+
+.contact_email_send_button:hover
+{
+   opacity: 0.5;
 }
 
 .new_tag
@@ -755,7 +812,8 @@ a.header_link:hover
    font-weight: bold;
    color: white;
    letter-spacing: 2px;
-   background-color: rgba(0, 150, 0, 75%);
+   background-color: rgba(0, 150, 0);
+   opacity: 0.75;
    height: 16px;
    width: 50px;
    display: grid;
@@ -780,7 +838,8 @@ a.header_link:hover
    font-weight: bold;
    color: white;
    letter-spacing: 2px;
-   background-color: rgba(255, 0, 0, 75%);
+   background-color: red;
+   opacity: 0.75;
    height: 16px;
    width: 50px;
    display: grid;

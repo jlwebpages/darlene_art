@@ -702,6 +702,11 @@ function navigate_to_next_image(gallery_name,image_number,direction)
    return true;
 }
 
+function scroll_to_top()
+{
+   window.scrollTo({top: 0,behavior: "smooth"});
+}
+
 function send_contact_email()
 {
    var email         = "mailto:";
@@ -870,12 +875,16 @@ function write_footer()
    var year = new Date().getFullYear();
 
 
+   document.writeln('');
    document.writeln('<div style="text-align: center; padding: 25px 0px 0px 0px">');
    document.writeln('   <a href="mailto:dkclaguna@gmail.com?subject=Darlene Laguna Art" title="Email"    ><img src="email_icon.png"     height="15px" style="padding: 0px 20px 0px 20px; vertical-align: middle"></a>');
    document.writeln('   <a href="https://www.instagram.com/dklaguna_art"                title="Instagram"><img src="instagram_icon.png" height="16px" style="padding: 0px 20px 0px 20px; vertical-align: middle"></a>');
    document.writeln('</div>');
    document.writeln('');
    document.writeln('<div class="copyright">Copyright &copy '+year+' Darlene Laguna Art<br>All Rights Reserved.</div>');
+   document.writeln('');
+   document.writeln('<button id="scroll_button" class="scroll_button" onclick="scroll_to_top();"><span class="scroll_shape"></span></button>');
+   document.writeln('');
 
    return true;
 }
@@ -931,3 +940,22 @@ function write_header()
 
    return true;
 }
+
+window.addEventListener("scroll", () =>
+{
+   var scroll_button = document.getElementById("scroll_button");
+
+
+   if (scroll_button != null)
+   {
+      if (window.scrollY > 500)
+      {
+         scroll_button.style.visibility = "visible";
+      }
+      else
+      {
+         scroll_button.style.visibility = "hidden";
+      }
+   }
+}
+);
