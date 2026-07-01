@@ -514,11 +514,11 @@ function load_data_from_file(gallery_name,file_name,element_id,title_extension,s
          if (element_id == "about_text")
          {
             file_name  = file_name.replace("about.txt","exhibitions.txt");
-            element_id = element_id.replace("about_text","exhibitions_text");
+            element_id = element_id.replace("about_text","exhibitions");
 
             load_data_from_file(gallery_name,file_name,element_id,title_extension,scroll_to_exhibitions,display_error);
          }
-         else if (element_id == "exhibitions_text")
+         else if (element_id == "exhibitions")
          {
             if (scroll_to_exhibitions == true) document.getElementById(element_id).scrollIntoView({behavior: "smooth"});
          }
@@ -948,7 +948,7 @@ window.addEventListener("scroll", () =>
 
    if (scroll_button != null)
    {
-      if (window.scrollY > 500)
+      if (window.scrollY > 400)
       {
          scroll_button.style.visibility = "visible";
       }

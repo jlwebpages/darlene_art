@@ -1,8 +1,28 @@
-I am a mixed media artist in Orange, CA. I am inspired by the landscape that surrounds me, which includes rolling hills that lead into southern California mountain ranges, and by the photographs I take while hiking. I use acrylic paints, a variety of mark making tools, and collage, and I often sand back to reveal underlying layers before building on top of them again. Sometimes I include pieces of my photographs, through collage or image transfer, when constructing a piece. Textures, relationships, seasonal changes, and climate change are some of the themes that you will find explored within my work.
+<span class="about_title">ARTIST STATEMENT</span>
+
 <p>
-A life-long art enthusiast, I began my art-making career about 15 years ago after parenting three sons and having a variety of volunteer, teaching, and engineering positions. What began as casual photography and journaling while hiking led to an interest in composition and finding creative ways to use my images and ideas, directly and indirectly, in mixed media pieces. My work has been included in juried exhibitions and sold in galleries.
+
+<span style="font-style: italic; padding; 0px">“This is what it feels like to be here.”</span>
+
 <p>
-For more information and details about purchasing, pricing, and framing options, or to view in person if you are in the Orange County area, please <a class="general_link" href="contact.html?image_file_name=./about/contact.jpg&image_title=">contact</a> me.
+
+I create mixed-media works that blend collage, original photography, and acrylic paint to explore my
+connection to the natural world. Inspired by the diverse landscape of southern California, I transform
+my encounters into layered compositions that evoke memory, sensation, and place. I carefully select
+materials that reflect the variety of perceptions I experience in my surroundings, using line, shape,
+color, and texture to define and highlight the unique features of my experiences. My goal is to convey
+a distinct sense of presence and beauty and to capture the unexpected.
+
 <p>
-Thank you,<br>
-Darlene Laguna
+
+<span class="about_title">BIO</span>
+
+<p>
+
+Darlene Laguna, a mixed-media artist based in Orange, California, is influenced by her engineering
+background, which instilled in her a sense of precision, logic, and analytical thinking. However, it
+was her love for hiking and exploring the natural world that ignited a profound sense of wonder that
+led her to art-making. What started as landscape photography evolved into a unique mixed-media practice
+that transforms her outdoor experiences into vibrant, layered, abstract compositions. Primarily self-taught,
+Laguna employs photography, collage, and acrylic painting techniques to investigate the emotional resonance
+of nature. Her work has been shown in numerous juried exhibitions and galleries.
