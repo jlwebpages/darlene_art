@@ -5,7 +5,7 @@ var max_image_number = 0;
 
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
-const gallery_list = [{name: "featured_work",  title: "Gallery",        min_image_number: 5, max_image_number: 32, new_list: [5,6,7,8]},
+const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 5, max_image_number: 32, new_list: [5,6,7,8]},
                       {name: "photo_art",      title: "Photo Art",      min_image_number: 6, max_image_number: 16, new_list: [0]},
                       {name: "works_on_paper", title: "Works on Paper", min_image_number: 6, max_image_number: 11, new_list: [0]},
                       {name: "sold",           title: "Sold",           min_image_number: 1, max_image_number: 19, new_list: [0]}]
@@ -793,6 +793,32 @@ function set_size_and_position_of_contact_page_elements()
          document.getElementById("nav_right").style.top = ( document.getElementById("contact_image").getBoundingClientRect().top + (contact_image.height/2) ) + "px";
       }
    }
+}
+
+function toggle_gallery_menu()
+{
+   if (document.getElementById("gallery_menu").style.display == "block")
+   {
+      document.getElementById("gallery_menu").style.display = "none";
+
+      if ( (is_mobile() == true) || (is_iPad() == true) || (is_older_iPad() == true) )
+      {
+         document.getElementById("gallery_link").style.color = "black";
+      }
+      else
+      {
+         document.getElementById("gallery_link").style.color = "";
+      }
+   }
+   else
+   {
+      document.getElementById("gallery_menu").style.display = "block";
+      document.getElementById("gallery_link").style.color   = "#BE0000";
+
+      window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+   }
+
+   return true;
 }
 
 function update_contact_image(image_file_name,direction)
