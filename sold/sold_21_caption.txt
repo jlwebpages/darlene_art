@@ -2,7 +2,7 @@
 
 <span class="art_title">
 
-Land Escape
+Hillside
 
 </span>
 
@@ -11,6 +11,6 @@ Land Escape
 
 <span class="art_dimensions">
 
-12.5 x 12.5 inch wood panel set in a maple floater frame
+16 x 16 inches on 1-inch cradled wood panel
 
 </span>

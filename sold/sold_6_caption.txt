@@ -2,24 +2,21 @@
 
 <span class="art_title">
 
-Breathing Space
+Vista Point
 
 </span>
 
 
-<!-- Dimensions -->
+<!-- Medium and Dimensions -->
 
 <span class="art_dimensions">
 
-Each is 6 x 12 inches on 1.5-inch cradled wood panel
+Acrylic and mixed media
 
 </span>
 
+<span class="art_dimensions">
 
-<div class="vertical_spacer"></div>
+8 x 8 inch cradled wood panel set in a maple floater frame
 
-<span class="art_paragraph"><b>Pause</b> (top)</span>
-
-<span class="art_paragraph"><b>Sanctuary</b> (middle)</span>
-
-<span class="art_paragraph"><b>Breathing Space</b> (bottom)</span>
+</span>
