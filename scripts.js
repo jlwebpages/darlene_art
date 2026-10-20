@@ -5,10 +5,10 @@ var max_image_number = 0;
 
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
-const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 4, max_image_number: 30, new_list: [4,5,6]},
-                      {name: "photo_art",      title: "Photo Art",      min_image_number: 4, max_image_number: 16, new_list: [4,5]},
-                      {name: "works_on_paper", title: "Works on Paper", min_image_number: 6, max_image_number: 11, new_list: [0]},
-                      {name: "sold",           title: "Sold",           min_image_number: 5, max_image_number: 25, new_list: [0]}]
+const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number:  4, max_image_number: 30, new_list: [4,5,6]},
+                      {name: "photo_art",      title: "Photo Art",      min_image_number:  4, max_image_number: 16, new_list: [4,5]},
+                      {name: "works_on_paper", title: "Works on Paper", min_image_number: 16, max_image_number: 21, new_list: [0]},
+                      {name: "sold",           title: "Sold",           min_image_number:  5, max_image_number: 25, new_list: [0], works_on_paper_list: [10,11,19]}]
 
 
 function check_if_image_exists(gallery_name,image_number,min_image_number,max_image_number,direction)
@@ -159,12 +159,10 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
    image.onload = function()
    {
-      var adjusted_image_height         = 0;
       var adjusted_image_width          = 0;
       var art_container_class           = "";
       var art_container_margin          = 35;
       var art_container_style           = "";
-      var back_button_vertical_position = 5;
       var caption_div_style             = "";
       var height_ratio                  = 1;
       var html_string                   = "";
@@ -173,6 +171,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
       var image_style                   = "";
       var minimum_caption_width         = 285;
       var nav_button_vertical_position  = 5;
+      var sold_works_on_paper           = false;
       var width_ratio                   = 1;
       var window_inner_height           = window.innerHeight;
       var window_inner_width            = window.innerWidth;
@@ -184,8 +183,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
       width_ratio  = image_width/window_inner_width;
       height_ratio = image_height/window_inner_height;
 
-      adjusted_image_width  = image_width/height_ratio;
-      adjusted_image_height = image_height/width_ratio;
+      adjusted_image_width = image_width/height_ratio;
 
       // If running in portrait orientation, set up a one column container instead of two.
 
@@ -228,24 +226,10 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
             // Reduce the image width to make room for the image caption.
 
             adjusted_image_width  = adjusted_image_width - ( (adjusted_image_width + minimum_caption_width + art_container_margin*2) - (window_inner_width) );
-            adjusted_image_height = image_height * (adjusted_image_width/image_width) - 15;  // Not exactly sure why -15.  Maybe to account for caption_div top and/or bottom margins.
 
             art_container_style = "style=\"margin-left: "+art_container_margin+"px; margin-right: "+art_container_margin+"px; place-content: center\"";
             image_style         = "style=\"width: "+adjusted_image_width+"px\"";
-            caption_div_style   = "style=\"max-width: 500px; height: "+adjusted_image_height+"px; padding-top: 5px\"";
-
-            back_button_vertical_position = ( (window_inner_height-adjusted_image_height) / 2 ) - 10;  // Not exactly sure why -10.
-
-            if (back_button_vertical_position < 5) back_button_vertical_position = 5;
-
-            if (is_older_iPad() == true)
-            {
-               // Make vertical button position adjustments.
-
-               if (back_button_vertical_position > 5) back_button_vertical_position += 13;
-
-               nav_button_vertical_position += 13;
-            }
+            caption_div_style   = "style=\"max-width: 500px; padding-top: 5px\"";
          }
          else   
          {
@@ -265,8 +249,88 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
          nav_button_vertical_position = window_inner_height / 2;
       }
 
-      back_button_vertical_position += "px";
-      nav_button_vertical_position  += "px";
+      nav_button_vertical_position += "px";
+
+      if (art_container_class == "image_container_two_column")
+      {
+         // Add top border to image caption.
+ 
+         caption_div_style = caption_div_style.slice(0, -1);
+
+         if (is_mobile() == true)
+         {
+            caption_div_style += "\"";
+         }
+         else if (is_iPad() == true)
+         {
+            caption_div_style += "; border-top: 20px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+         }
+         else
+         {
+            caption_div_style += "; border-top: 30px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+         }
+      }
+
+      // Determine if this image is a Works on Paper item in the Sold gallery.
+
+      if (gallery_name == "sold")
+      {
+         for (i = 0; i < gallery_list.length; i++)
+         {
+            if (gallery_name == gallery_list[i]["name"])
+            {
+               for (j = 0; j < gallery_list[i]["works_on_paper_list"].length; j++)
+               {
+                  if (image_number == gallery_list[i]["works_on_paper_list"][j])
+                  {
+                     sold_works_on_paper = true;
+
+                     break;
+                  }
+               }
+            }
+         }
+      }
+
+      if ( (gallery_name == "works_on_paper") || (sold_works_on_paper == true) )
+      {
+         // Add border to image.
+
+         image_style = image_style.slice(0, -1);
+
+         if (is_mobile() == true)
+         {
+            image_style += "; border: 10px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+         }
+         else if (is_iPad() == true)
+         {
+            image_style += "; border: 30px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+         }
+         else
+         {
+            image_style += "; border: 40px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+         }
+
+         if (art_container_class == "image_container_one_column")
+         {
+            // Add left border to image caption.
+
+            caption_div_style = caption_div_style.slice(0, -1);
+
+            if (is_mobile() == true)
+            {
+               caption_div_style += "\"";
+            }
+            else if (is_iPad() == true)
+            {
+               caption_div_style += "; border-left: 20px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+            }
+            else
+            {
+               caption_div_style += "; border-left: 30px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)\"";
+            }
+         }
+      }
 
       html_string += '';
       html_string += '';
@@ -284,7 +348,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
       html_string += '';
       html_string += '</div>';
       html_string += '';
-      html_string += '<button id="nav_back"  class="back_button"                 style="top: '+back_button_vertical_position+'" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
+      html_string += '<button id="nav_back"  class="back_button" onclick="display_gallery_page(\''+gallery_name+'\');">&times;</button>';
       html_string += '<button id="nav_left"  class="nav_button nav_left_offset"  style="top: '+nav_button_vertical_position+'"  onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\'left\');"><div class="nav_left_shape"></div></button>';
       html_string += '<button id="nav_right" class="nav_button nav_right_offset" style="top: '+nav_button_vertical_position+'"  onclick="navigate_to_next_image(\''+gallery_name+'\',\''+image_number+'\',\'right\');"><div class="nav_right_shape"></div></button>';
       html_string += '';
@@ -292,11 +356,51 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
       document.body.innerHTML = html_string;
 
-      load_image_caption(gallery_name,image_number);
+      if (art_container_class == "image_container_two_column")
+      {
+         // Set height of "caption_div" to height of "image_div".
+
+         if (is_mobile() == true)
+         {
+            document.getElementById("caption_div").style.height = (document.getElementById("image_div").getBoundingClientRect().height - 19.4) + "px";
+         }
+         else if (is_iPad() == true)
+         {
+            document.getElementById("caption_div").style.height = (document.getElementById("image_div").getBoundingClientRect().height - 5) + "px";
+         }
+         else
+         {
+            document.getElementById("caption_div").style.height = (document.getElementById("image_div").getBoundingClientRect().height - 4) + "px";
+         }
+
+         // Adjust vertical position of back button if needed.
+
+         if (document.querySelector("#caption_div").getBoundingClientRect().top > 5)
+         {
+            document.getElementById("nav_back").style.top = document.querySelector("#caption_div").getBoundingClientRect().top + "px";
+         }
+      }
+
+      if ( ((gallery_name == "works_on_paper") || (sold_works_on_paper == true)) && (is_mobile() == true) && (art_container_class == "image_container_one_column") )
+      {
+         // Adjust position of back button.
+
+         document.getElementById("nav_back").style.top   = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).top)   + 10) + "px";
+         document.getElementById("nav_back").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).right) + 10) + "px";
+
+         // Adjust position of navigation buttons.
+
+         document.getElementById("nav_left").style.left   = (parseInt(window.getComputedStyle(document.getElementById("nav_left")).left)   + 10) + "px";
+         document.getElementById("nav_right").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_right")).right) + 10) + "px";
+      }
 
       // Update the browser address field.
 
       window.history.replaceState({}, document.title, window.location.pathname+"?image_file_name="+image_file_name+"&min_image_number="+min_image_number+"&max_image_number="+max_image_number);
+
+      // Load the next image into the gallery.
+
+      load_image_caption(gallery_name,image_number);
 
       return true;
    }
@@ -543,7 +647,15 @@ function load_image(gallery_name,image_number,image_count)
    var file_path_prefix = gallery_name + "/" + file_name_prefix;
    var image_html       = "";
    var image_path       = file_path_prefix + ".jpg";
+   var image_style      = "";
 
+
+   if (gallery_name == "works_on_paper")
+   {
+      // Add border to image.
+
+      image_style = ' style="border: 10px solid var(--background_color); box-sizing: border-box; background-color: var(--background_color)"';
+   }
 
    if (column_count == 1)
    {
@@ -563,7 +675,7 @@ function load_image(gallery_name,image_number,image_count)
    }
 
    image_html += '<div class="art_image_link_container">\n';
-   image_html += '   <a class="art_image_link" href="display_image.html?image_file_name='+image_path+'&min_image_number='+min_image_number+'&max_image_number='+max_image_number+'" target="_self"><img src="'+image_path+'" class="art_image border_radius"></a>\n';
+   image_html += '   <a class="art_image_link" href="display_image.html?image_file_name='+image_path+'&min_image_number='+min_image_number+'&max_image_number='+max_image_number+'" target="_self"><img src="'+image_path+'" class="art_image border_radius"'+image_style+'></a>\n';
 
    for (i = 0; i < gallery_list[gallery_index]["new_list"].length; i++)
    {
