@@ -5,9 +5,9 @@ var max_image_number = 0;
 
 // Constant variables.  These values should be set based on the largest image file number from the respective website subfolders.
 
-const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 16, max_image_number: 42, new_list: [16,17,18]},
-                      {name: "photo_art",      title: "Photo Art",      min_image_number: 16, max_image_number: 28, new_list: [16,17]},
-                      {name: "works_on_paper", title: "Works on Paper", min_image_number: 16, max_image_number: 21, new_list: [0]},
+const gallery_list = [{name: "featured_work",  title: "Featured Work",  min_image_number: 15, max_image_number: 42, new_list: [15,16,17,18]},
+                      {name: "photo_art",      title: "Photo Art",      min_image_number: 15, max_image_number: 28, new_list: [15,16,17]},
+                      {name: "works_on_paper", title: "Works on Paper", min_image_number: 12, max_image_number: 21, new_list: [12,13,14,15]},
                       {name: "sold",           title: "Sold",           min_image_number:  5, max_image_number: 25, new_list: [0], works_on_paper_list: [10,11,19]}]
 
 
@@ -646,13 +646,15 @@ function load_image(gallery_name,image_number,image_count)
    var image_html       = "";
    var image_path       = file_path_prefix + ".jpg";
    var image_style      = "";
+   var new_tag_style    = "";
 
 
    if (gallery_name == "works_on_paper")
    {
       // Add border to image.
 
-      image_style = ' style="border: 10px solid var(--background_color); box-sizing: border-box"';
+      image_style   = ' style="border: 10px solid var(--background_color); box-sizing: border-box"';
+      new_tag_style = ' style="top: 9.8px; left: 9.8px"';
    }
 
    if (column_count == 1)
@@ -679,7 +681,7 @@ function load_image(gallery_name,image_number,image_count)
    {
       if (image_number == gallery_list[gallery_index]["new_list"][i])
       {
-         image_html += '   <div id="solld_tag" class="new_tag">NEW</div>\n';
+         image_html += '   <div id="solld_tag" class="new_tag"'+new_tag_style+'>NEW</div>\n';
       }
    }
 
