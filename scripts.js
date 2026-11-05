@@ -191,6 +191,18 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
          }
       }
 
+      if (is_portrait() == false)
+      {
+         if (is_mobile() == true)
+         {
+            minimum_caption_width = 275;
+         }
+         else if (is_iPad() == true)
+         {
+            minimum_caption_width = 300;
+         }
+      }
+
       image_width  = this.naturalWidth;
       image_height = this.naturalHeight;
 
@@ -267,21 +279,21 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
       if (art_container_class == "image_container_two_column")
       {
-         // Add top border to image caption.
+         // Add top padding to image caption.
  
          caption_div_style = caption_div_style.slice(0, -1);
 
          if (is_mobile() == true)
          {
-            caption_div_style += "; border-top: 0px solid var(--background_color); box-sizing: border-box\"";
+            caption_div_style += "; padding-top: 0px; box-sizing: border-box\"";
          }
          else if (is_iPad() == true)
          {
-            caption_div_style += "; border-top: 20px solid var(--background_color); box-sizing: border-box\"";
+            caption_div_style += "; padding-top: 20px; box-sizing: border-box\"";
          }
          else
          {
-            caption_div_style += "; border-top: 30px solid var(--background_color); box-sizing: border-box\"";
+            caption_div_style += "; padding-top: 30px; box-sizing: border-box\"";
          }
       }
 
