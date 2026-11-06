@@ -213,7 +213,7 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
 
       // If running in portrait orientation, set up a one column container instead of two.
 
-      if (window_inner_height >= window_inner_width)
+      if (is_portrait() == true)
       {
          art_container_class = "image_container_one_column";
          caption_div_style   = "style=\"height: auto\"";
