@@ -209,14 +209,16 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
       {
          art_container_class = "image_container_one_column";
 
-         image_style         = "style=\"display: block; width: "+window_inner_width+"px; height: auto\"";
-         caption_div_style   = "style=\"height: auto\"";
+         caption_div_style = "style=\"height: auto\"";
 
-         nav_button_vertical_position = image_height * (window_inner_width/image_width) / 2;
+         if (is_mobile() == true)
+         {
+            adjusted_image_width = window_inner_width;
+         }
 
          if (is_iPad() == true)
          {
-            // Enforce a maximum image width for iPads in portrait orienetation.
+            // Allow for left and right padding and enforce a maximum image width.
 
             adjusted_image_width = window_inner_width - art_container_margin*2;
 
@@ -225,24 +227,25 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
                adjusted_image_width = maximum_ipad_portrait_image_width;
             }
 
-            // Calculate adjusted image height from adjusted image width.
-
-            adjusted_image_height = image_height * (adjusted_image_width/image_width);
-
-            // If adjusted image height is greater than image height percent threshold, reduce image size to meet image height percent threshold.
-
-            if (adjusted_image_height > window_inner_height*image_height_percent_threshold)
-            {
-               adjusted_image_width = image_width * (window_inner_height*image_height_percent_threshold)/image_height;
-            }
-
-            art_container_style = "style=\"width: "+adjusted_image_width+"px; margin: 0px auto\"";
-            image_style         = "style=\"display: block; width: "+adjusted_image_width+"px; height: auto\"";
-
             nav_button_vertical_position = window_inner_height / 2;
          }
 
-         if (nav_button_vertical_position > window_inner_height / 2) nav_button_vertical_position = window_inner_height / 2;
+         // Calculate adjusted image height from adjusted image width.
+
+         adjusted_image_height = image_height * (adjusted_image_width/image_width);
+
+         // If adjusted image height is greater than image height percent threshold, reduce image size to meet image height percent threshold.
+
+         if (adjusted_image_height > window_inner_height*image_height_percent_threshold)
+         {
+            adjusted_image_height = window_inner_height*image_height_percent_threshold;
+            adjusted_image_width  = image_width * (adjusted_image_height/image_height);
+         }
+
+         art_container_style = "style=\"width: "+adjusted_image_width+"px; margin: 0px auto\"";
+         image_style         = "style=\"display: block; width: "+adjusted_image_width+"px; height: auto\"";
+
+         if (is_mobile() == true) nav_button_vertical_position = adjusted_image_height / 2;
       }
       else
       {
@@ -391,17 +394,34 @@ function display_image_with_caption(image_file_name,gallery_name,image_number)
          }
       }
 
-      if ( (image_border == true) && (is_mobile() == true) && (art_container_class == "image_container_one_column") )
+      if ( (is_mobile() == true) && (art_container_class == "image_container_one_column") )
       {
-         // Adjust position of back button.
+         if (image_border == true)
+         {
+            // Adjust position of back button.
 
-         document.getElementById("nav_back").style.top   = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).top)   + 10) + "px";
-         document.getElementById("nav_back").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).right) + 10) + "px";
+            document.getElementById("nav_back").style.top   = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).top)   + 10) + "px";
+            document.getElementById("nav_back").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).right) + 10) + "px";
 
-         // Adjust position of navigation buttons.
+            // Adjust position of navigation buttons.
 
-         document.getElementById("nav_left").style.left   = (parseInt(window.getComputedStyle(document.getElementById("nav_left")).left)   + 10) + "px";
-         document.getElementById("nav_right").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_right")).right) + 10) + "px";
+            document.getElementById("nav_left").style.left   = (parseInt(window.getComputedStyle(document.getElementById("nav_left")).left)   + 10) + "px";
+            document.getElementById("nav_right").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_right")).right) + 10) + "px";
+         }
+
+         if (window_inner_width > adjusted_image_width)
+         {
+            pixel_adjustment = (window_inner_width - adjusted_image_width) / 2;
+
+            // Adjust position of back button.
+
+            document.getElementById("nav_back").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_back")).right) + pixel_adjustment) + "px";
+
+            // Adjust position of navigation buttons.
+
+            document.getElementById("nav_left").style.left   = (parseInt(window.getComputedStyle(document.getElementById("nav_left")).left)   + pixel_adjustment) + "px";
+            document.getElementById("nav_right").style.right = (parseInt(window.getComputedStyle(document.getElementById("nav_right")).right) + pixel_adjustment) + "px";
+         }
       }
 
       // Update the browser address field.
